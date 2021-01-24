@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  database: code_development
+  database: macmorris_db
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -27,7 +27,7 @@ default: &default
 
 development:
   <<: *default
-  database: code_development
+  # database: code_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -61,7 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: code_test
+  # database: code_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -85,6 +85,6 @@ test:
 #
 production:
   <<: *default
-  database: code_production
-  username: code
+  # database: code_production
+  username: macmorris
   password: <%= ENV['CODE_DATABASE_PASSWORD'] %>
