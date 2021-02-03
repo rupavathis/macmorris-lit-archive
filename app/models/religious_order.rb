@@ -1,0 +1,2 @@
+class ReligiousOrder < ApplicationRecord
+end

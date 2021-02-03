@@ -1,0 +1,2 @@
+class BirthDeathDateType < ApplicationRecord
+end

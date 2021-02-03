@@ -1,0 +1,2 @@
+class ReligiousDesignation < ApplicationRecord
+end
