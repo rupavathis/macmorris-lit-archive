@@ -1,0 +1,2 @@
+class WorkForm < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class WorkClassification < ApplicationRecord
+end

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site_id: MyString
+  site_type: one
+  name_in_EN: MyString
+  name_in_GA: MyString
+  place: one
+  desc: MyString
+
+two:
+  site_id: MyString
+  site_type: two
+  name_in_EN: MyString
+  name_in_GA: MyString
+  place: two
+  desc: MyString

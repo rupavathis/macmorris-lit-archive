@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  resources :sites
+  resources :site_types
+  resources :events
+  resources :event_types
+  resources :works
+  resources :authorships
+  resources :work_source_libraries
+  resources :work_forms
+  resources :work_classifications
+  resources :places
+  resources :place_types
+  resources :test_dels
+  resources :people
   resources :birth_death_date_types
   resources :genders
   resources :religious_orders

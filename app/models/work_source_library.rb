@@ -1,0 +1,2 @@
+class WorkSourceLibrary < ApplicationRecord
+end
