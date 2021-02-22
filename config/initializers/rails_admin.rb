@@ -67,6 +67,9 @@ RailsAdmin.config do |config|
     field :display_title do
       required true
     end
+    field :work_date do
+      strftime_format "%Y-%m"
+    end
     field :marc_id do
       label 'MARC ID'
     end
@@ -102,6 +105,12 @@ RailsAdmin.config do |config|
     field :name_in_GA do
       label 'Name (Gaelic)'
     end
+    field :start_date do
+      strftime_format "%Y-%m"
+    end  
+    field :end_date do
+      strftime_format "%Y-%m"
+    end  
     field :place do
       label 'Location'
     end
@@ -153,13 +162,23 @@ RailsAdmin.config do |config|
     field :display_name
     field :gender
     field :birth_date_type
-    field :date_of_birth
+    field :date_of_birth do
+      strftime_format "%Y-%m"
+    end
     field :death_date_type
-    field :date_of_death
+    field :date_of_death do
+      strftime_format "%Y-%m"
+    end
     field :flourishing_date_type
-    field :flourishing_date
-    field :active_in_ireland_start
-    field :active_in_ireland_end
+    field :flourishing_date do
+      strftime_format "%Y-%m"
+    end
+    field :active_in_ireland_start do
+      strftime_format "%Y-%m"
+    end      
+    field :active_in_ireland_end do
+      strftime_format "%Y-%m"
+    end
     field :religious_subtype
     field :religious_order
     field :attrib do
@@ -177,6 +196,9 @@ RailsAdmin.config do |config|
     field :patron_id
     field :bardic_id
     field :sdfb
+    exclude_fields :person_author
+    exclude_fields :person_patron
+
     # field :t.timestamps
     # field :created_at
     # config.default_hidden_fields = {
