@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 2021_02_18_165102) do
     t.date "active_in_ireland_end"
     t.bigint "religious_subtype_id", null: false
     t.bigint "religious_order_id", null: false
-    t.bigint "attrib_id", null: false
     t.string "self_described_identity"
     t.string "quotes"
     t.string "notes"
@@ -112,7 +111,6 @@ ActiveRecord::Schema.define(version: 2021_02_18_165102) do
     t.string "sdfb"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["attrib_id"], name: "index_people_on_attrib_id"
     t.index ["birth_date_type_id"], name: "index_people_on_birth_date_type_id"
     t.index ["death_date_type_id"], name: "index_people_on_death_date_type_id"
     t.index ["flourishing_date_type_id"], name: "index_people_on_flourishing_date_type_id"
@@ -186,10 +184,10 @@ ActiveRecord::Schema.define(version: 2021_02_18_165102) do
 
   create_table "sites", force: :cascade do |t|
     t.string "site_id"
-    t.bigint "site_type_id", null: false
+    t.bigint "site_type_id"
     t.string "name_in_EN"
     t.string "name_in_GA"
-    t.bigint "place_id", null: false
+    t.bigint "place_id"
     t.string "desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -254,7 +252,6 @@ ActiveRecord::Schema.define(version: 2021_02_18_165102) do
   add_foreign_key "attribs", "roles"
   add_foreign_key "events", "event_types"
   add_foreign_key "events", "places"
-  add_foreign_key "people", "attribs"
   add_foreign_key "people", "religious_orders"
   add_foreign_key "people", "religious_subtypes"
   add_foreign_key "places", "place_types"

@@ -51,12 +51,130 @@ RailsAdmin.config do |config|
   end
   config.model 'Attrib' do
     label 'Attributes/Roles'
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'WorkClassification' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'WorkSourceLibrary' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'WorkForm' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'siteType' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'Role' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'RelationshipCategory' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'RelationshipType' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'ReligiousDesignation' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'ReligiousOrder' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'PlaceType' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+
+  config.model 'Language' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+  config.model 'Gender' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+  config.model 'EventType' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+  config.model 'BirthDeathDateType' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+  config.model 'Authorship' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+  config.model 'ReligiousSubtype' do
+    include_all_fields
+    field :name do
+      required true
+    end
+  end
+  config.model 'SiteType' do
+    include_all_fields
+    field :name do
+      required true
+    end
   end
 
   config.model 'Work' do
     include_all_fields
     field :work_id do
       label 'Work ID'
+      required true
     end
     field :place do
       label 'Location'
@@ -98,6 +216,7 @@ RailsAdmin.config do |config|
     include_all_fields
     field :event_id do
       label 'Event ID'
+      required true
     end
     field :name_in_EN do
       label 'Name (English)'
@@ -121,6 +240,10 @@ RailsAdmin.config do |config|
     include_all_fields
     field :site_id do
       label 'Site ID'
+      required true
+    end
+    field :site_type do
+      # required false
     end
     field :name_in_EN do
       label 'Name (English)'
@@ -130,6 +253,7 @@ RailsAdmin.config do |config|
     end
     field :place do
       label 'Location'
+      # required false
     end
   end
 
@@ -181,9 +305,9 @@ RailsAdmin.config do |config|
     end
     field :religious_subtype
     field :religious_order
-    field :attrib do
-      label 'Attributes/Role' # Change the label of this field
-    end
+    # field :attrib do
+    #   label 'Attributes/Role' # Change the label of this field
+    # end
     field :self_described_identity
     field :quotes
     field :notes

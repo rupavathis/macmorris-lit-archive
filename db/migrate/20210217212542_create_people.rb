@@ -25,7 +25,7 @@ class CreatePeople < ActiveRecord::Migration[6.1]
       t.date :active_in_ireland_end
       t.references :religious_subtype, null: false, foreign_key: true
       t.references :religious_order, null: false, foreign_key: true
-      t.references :attrib, null: false, foreign_key: true
+      # t.references :attrib, null: false, foreign_key: true
       t.string :self_described_identity
       t.string :quotes
       t.string :notes

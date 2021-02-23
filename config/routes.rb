@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :create_languages_people_join_tables
+  resources :create_join_table_people_languages
+  resources :add_people_ref_to_languages
+  resources :event_tests
   resources :sites
   resources :site_types
   resources :events
