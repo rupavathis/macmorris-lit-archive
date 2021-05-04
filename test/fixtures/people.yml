@@ -5,7 +5,7 @@ one:
   is_cultural_actor: false
   first_name: MyString
   last_name: MyString
-  maidan_name: MyString
+  maiden_name: MyString
   husbands_name: MyString
   aristocratic_title: MyString
   pseudonym: MyString
@@ -16,16 +16,15 @@ one:
   display_name: MyString
   gender: MyString
   birth_date_type: one
-  date_of_birth: 2021-02-17
+  date_of_birth: 2021-03-07
+  place: one
   death_date_type: one
-  date_of_death: 2021-02-17
+  date_of_death: 2021-03-07
   florishing_date_type: one
-  flourishing_date: 2021-02-17
-  active_in_ireland_start: 2021-02-17
-  active_in_ireland_end: 2021-02-17
-  religious_subtype: one
+  flourishing_date: 2021-03-07
+  active_in_ireland_start: 2021-03-07
+  active_in_ireland_end: 2021-03-07
   religious_order: one
-  attrib: one
   self_described_identity: MyString
   quotes: MyString
   notes: MyString
@@ -35,8 +34,6 @@ one:
   tnop_id: MyString
   wikidata_id: MyString
   ainm_id: MyString
-  patron_id: MyString
-  bardic_id: MyString
   sdfb: MyString
 
 two:
@@ -44,7 +41,7 @@ two:
   is_cultural_actor: false
   first_name: MyString
   last_name: MyString
-  maidan_name: MyString
+  maiden_name: MyString
   husbands_name: MyString
   aristocratic_title: MyString
   pseudonym: MyString
@@ -55,16 +52,15 @@ two:
   display_name: MyString
   gender: MyString
   birth_date_type: two
-  date_of_birth: 2021-02-17
+  date_of_birth: 2021-03-07
+  place: two
   death_date_type: two
-  date_of_death: 2021-02-17
+  date_of_death: 2021-03-07
   florishing_date_type: two
-  flourishing_date: 2021-02-17
-  active_in_ireland_start: 2021-02-17
-  active_in_ireland_end: 2021-02-17
-  religious_subtype: two
+  flourishing_date: 2021-03-07
+  active_in_ireland_start: 2021-03-07
+  active_in_ireland_end: 2021-03-07
   religious_order: two
-  attrib: two
   self_described_identity: MyString
   quotes: MyString
   notes: MyString
@@ -74,6 +70,4 @@ two:
   tnop_id: MyString
   wikidata_id: MyString
   ainm_id: MyString
-  patron_id: MyString
-  bardic_id: MyString
   sdfb: MyString

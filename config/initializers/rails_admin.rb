@@ -41,134 +41,134 @@ RailsAdmin.config do |config|
     # history_show
   end
   # To change the heading of the admin app
-  RailsAdmin.config do |config|
-    config.main_app_name = ["MACMORRIS", "Admin"]
-  end
+  # RailsAdmin.config do |config|
+  config.main_app_name = ["MACMORRIS", "Admin"]
+  # end
    # Optional:
   # Configure global RailsAdminImport options
-  config.configure_with(:import) do |config|
-    config.logging = true
-  end
-  config.model 'Attrib' do
-    label 'Attributes/Roles'
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.configure_with(:import) do |config|
+  #   config.logging = true
+  # end
+  # config.model 'Attrib' do
+  #   label 'Attributes/Roles'
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'WorkClassification' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'WorkClassification' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'WorkSourceLibrary' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'WorkSourceLibrary' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'WorkForm' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'WorkForm' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'siteType' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'siteType' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'Role' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'Role' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'RelationshipCategory' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'RelationshipCategory' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'RelationshipType' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'RelationshipType' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'ReligiousDesignation' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'ReligiousDesignation' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'ReligiousOrder' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'ReligiousOrder' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'PlaceType' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'PlaceType' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
-  config.model 'Language' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
-  config.model 'Gender' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
-  config.model 'EventType' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
-  config.model 'BirthDeathDateType' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
-  config.model 'Authorship' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
-  config.model 'ReligiousSubtype' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
-  config.model 'SiteType' do
-    include_all_fields
-    field :name do
-      required true
-    end
-  end
+  # config.model 'Language' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
+  # config.model 'Gender' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
+  # config.model 'EventType' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
+  # config.model 'BirthDeathDateType' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
+  # config.model 'Authorship' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
+  # config.model 'ReligiousSubtype' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
+  # config.model 'SiteType' do
+  #   include_all_fields
+  #   field :name do
+  #     required true
+  #   end
+  # end
 
   config.model 'Work' do
     include_all_fields
@@ -176,10 +176,17 @@ RailsAdmin.config do |config|
       label 'Work ID'
       required true
     end
+    field :author_id do
+      label 'Author'
+    end
+
+    field :patron_id do
+      label 'Patron/Collaborator'
+    end
     field :place do
       label 'Location'
     end
-    field :desc do
+    field :description do
       label 'Description'
     end
     field :display_title do
@@ -191,9 +198,9 @@ RailsAdmin.config do |config|
     field :marc_id do
       label 'MARC ID'
     end
-    field :bardic_id do
-      label 'Bardic ID'
-    end
+    # field :bardic_poetry_id do
+    #   label 'Bardic ID'
+    # end
     field :marc_id do
       label 'MARC ID'
     end
@@ -203,10 +210,10 @@ RailsAdmin.config do |config|
 
   config.model 'Place' do
     include_all_fields
-    field :name_in_EN do
+    field :name do
       label 'Name (English)'
     end
-    field :name_in_GA do
+    field :gaelic_name do
       label 'Name (Gaelic)'
     end
   end
@@ -218,17 +225,17 @@ RailsAdmin.config do |config|
       label 'Event ID'
       required true
     end
-    field :name_in_EN do
-      label 'Name (English)'
-    end
-    field :name_in_GA do
+    # field :name_in_EN do
+    #   label 'Name (English)'
+    # end
+    field :gaelic_name do
       label 'Name (Gaelic)'
     end
     field :start_date do
       strftime_format "%Y-%m"
     end  
     field :end_date do
-      strftime_format "%Y-%m"
+      strftime_format ("%Y-%m" || "%Y" || "%Y-%m-%d")
     end  
     field :place do
       label 'Location'
@@ -245,10 +252,10 @@ RailsAdmin.config do |config|
     field :site_type do
       # required false
     end
-    field :name_in_EN do
+    field :name do
       label 'Name (English)'
     end
-    field :name_in_GA do
+    field :gaelic_name do
       label 'Name (Gaelic)'
     end
     field :place do
@@ -273,7 +280,7 @@ RailsAdmin.config do |config|
     end
     field :first_name
     field :last_name
-    field :maidan_name
+    field :maiden_name
     field :husbands_name do
       label 'Husband(s) Name'
     end
@@ -285,43 +292,60 @@ RailsAdmin.config do |config|
     field :other_names
     field :display_name
     field :gender
-    field :birth_date_type
+    field :birth_date_type do
+      required false
+    end
     field :date_of_birth do
-      strftime_format "%Y-%m"
+      strftime_format "%Y-%m-%d"
     end
-    field :death_date_type
+    field :death_date_type do
+      required false
+    end
     field :date_of_death do
-      strftime_format "%Y-%m"
+      strftime_format "%Y-%m-%d"
     end
-    field :flourishing_date_type
+    field :flourishing_date_type do
+      required false
+    end
     field :flourishing_date do
-      strftime_format "%Y-%m"
+      strftime_format "%Y-%m-%d"
     end
     field :active_in_ireland_start do
-      strftime_format "%Y-%m"
+      strftime_format "%Y-%m-%d"
     end      
     field :active_in_ireland_end do
-      strftime_format "%Y-%m"
+      strftime_format "%Y-%m-%d"
     end
-    field :religious_subtype
-    field :religious_order
+    # field :religious_order
     # field :attrib do
     #   label 'Attributes/Role' # Change the label of this field
     # end
     field :self_described_identity
+    field :nationality do
+      label 'Nationality (if not Irish or English)'
+    end
     field :quotes
     field :notes
     field :reference_text
-    field :odnb_id
-    field :dib_id
-    field :tnop_id
-    field :wikidata_id
-    field :ainm_id
-    field :patron_id
-    field :bardic_id
-    field :sdfb
+    field :odnb_id do
+      label 'ODNB ID'
+    end
+    field :dib_id do
+      label 'DIB ID'
+    end
+    field :tnop_id do
+      label 'TNOP ID'
+    end
+    field :wikidata_id     
+    field :ainm_id do
+      label 'AINM ID'
+    end
+    field :sdfb do
+      label 'SDFB'
+    end
     exclude_fields :person_author
     exclude_fields :person_patron
+    exclude_fields :person_printer
 
     # field :t.timestamps
     # field :created_at

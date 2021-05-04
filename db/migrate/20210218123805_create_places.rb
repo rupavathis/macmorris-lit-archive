@@ -1,12 +1,15 @@
 class CreatePlaces < ActiveRecord::Migration[6.1]
   def change
     create_table :places do |t|
-      t.string :name_in_EN
-      t.string :name_in_GA
+      t.string :location
+      t.string :name
+      t.string :gaelic_name
       t.references :place_type, null: false, foreign_key: true
       t.boolean :is_available
-      t.string :geo_code
+      t.float :latitude
+      t.float :longitude
       t.boolean :is_accurate
+      t.string :wikidata
 
       t.timestamps
     end

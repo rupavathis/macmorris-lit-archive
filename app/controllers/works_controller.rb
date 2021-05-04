@@ -46,6 +46,6 @@ class WorksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def work_params
-      params.require(:work).permit(:work_id, :person_id, :authorship_id, :work_form_id, :title, :display_title, :work_classification_id, :work_date, :place_id, :visualisation_location, :shelfmark, :work_source_library_id, :marc_id, :bardic_id, :work_link, :desc)
+      params.require(:work).permit(:work_id, :person_id, :authorship_id, :work_form_id, :title, :display_title, :language_id, :work_date, :place_id, :visualisation_location, :shelfmark, :work_source_library_id, :marc_id, :bardic_id, :link_uri, :description)
     end
 end

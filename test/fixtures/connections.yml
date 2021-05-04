@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source_target_type: one
+  source: MyString
+  target: MyString
+  birth_death_date_type: one
+  start_date: 2021-03-08
+  end_date: 2021-03-08
+  time_period: one
+  place: one
+  reference: MyString
+  connection_verified: false
+
+two:
+  source_target_type: two
+  source: MyString
+  target: MyString
+  birth_death_date_type: two
+  start_date: 2021-03-08
+  end_date: 2021-03-08
+  time_period: two
+  place: two
+  reference: MyString
+  connection_verified: false

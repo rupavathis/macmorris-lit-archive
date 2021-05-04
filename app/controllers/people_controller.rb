@@ -46,6 +46,6 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:macmorris_id, :is_cultural_actor, :first_name, :last_name, :maidan_name, :husbands_name, :aristocratic_title, :pseudonym, :initials, :religious_title, :name_in_religion, :other_names, :display_name, :gender, :birth_date_type_id, :date_of_birth, :death_date_type_id, :date_of_death, :florishing_date_type_id, :flourishing_date, :active_in_ireland_start, :active_in_ireland_end, :religious_subtype_id, :religious_order_id, :attrib_id, :self_described_identity, :quotes, :notes, :reference_text, :odnb_id, :dib_id, :tnop_id, :wikidata_id, :ainm_id, :patron_id, :bardic_id, :sdfb)
+      params.require(:person).permit(:macmorris_id, :is_cultural_actor, :first_name, :last_name, :maiden_name, :husbands_name, :aristocratic_title, :pseudonym, :initials, :religious_title, :name_in_religion, :other_names, :display_name, :gender, :birth_date_type_id, :date_of_birth, :place_id, :death_date_type_id, :date_of_death, :florishing_date_type_id, :flourishing_date, :active_in_ireland_start, :active_in_ireland_end, :religious_order_id, :self_described_identity, :quotes, :notes, :reference_text, :odnb_id, :dib_id, :tnop_id, :wikidata_id, :ainm_id, :sdfb)
     end
 end

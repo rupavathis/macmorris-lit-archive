@@ -4,11 +4,11 @@ class CreateSites < ActiveRecord::Migration[6.1]
       t.string :site_id
       t.references :site_type, foreign_key: true
       # , null: false,
-      t.string :name_in_EN
-      t.string :name_in_GA
+      t.string :name
+      t.string :gaelic_name
       t.references :place, foreign_key: true
       # null: false,
-      t.string :desc
+      t.string :description
 
       t.timestamps
     end

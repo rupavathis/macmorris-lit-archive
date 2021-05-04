@@ -5,33 +5,33 @@ one:
   person: one
   authorship: one
   work_form: one
-  title: MyText
+  title: MyString
   display_title: MyString
-  language: one
-  work_date: 2021-03-28
+  work_classification: one
+  work_date: 2021-03-12
   place: one
   visualisation_location: MyString
   shelfmark: MyString
   work_source_library: one
   marc_id: MyString
   bardic_id: MyString
-  link_uri: MyString
-  description: MyString
+  work_link: MyString
+  desc: MyString
 
 two:
   work_id: MyString
   person: two
   authorship: two
   work_form: two
-  title: MyText
+  title: MyString
   display_title: MyString
-  language: two
-  work_date: 2021-03-28
+  work_classification: two
+  work_date: 2021-03-12
   place: two
   visualisation_location: MyString
   shelfmark: MyString
   work_source_library: two
   marc_id: MyString
   bardic_id: MyString
-  link_uri: MyString
-  description: MyString
+  work_link: MyString
+  desc: MyString

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :work_details
+  resources :connections
+  resources :time_periods
+  resources :source_target_types
+  resources :timeperiods
+  resources :bardic_poetries
   resources :create_languages_people_join_tables
   resources :create_join_table_people_languages
   resources :add_people_ref_to_languages
