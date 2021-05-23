@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source_target_type: one
+  person: one
+  site: one
+  birth_death_date_type: one
+  start_date: 2021-05-21
+  end_date: 2021-05-21
+  time_period: one
+  place: one
+  reference_text: MyString
+
+two:
+  source_target_type: two
+  person: two
+  site: two
+  birth_death_date_type: two
+  start_date: 2021-05-21
+  end_date: 2021-05-21
+  time_period: two
+  place: two
+  reference_text: MyString

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :people_relatives
+  resources :people_sites
+  resources :events_people
   resources :work_details
   resources :connections
   resources :time_periods

@@ -6,4 +6,8 @@ class BirthDeathDateType < ApplicationRecord
     has_many :end_date_type_Event, :class_name => 'Event', :foreign_key => 'end_date_type_id'
     has_many :start_date_type_connection, :class_name => 'Connection', :foreign_key => 'start_date_type_id'
     has_many :end_date_type_connection, :class_name => 'Connection', :foreign_key => 'end_date_type_id'
+    has_many :start_date_type_Events_Person, :class_name => 'EventsPerson', :foreign_key => 'start_date_type_id'
+    has_many :end_date_type_Events_Person, :class_name => 'EventsPerson', :foreign_key => 'end_date_type_id'
+    has_many :start_date_type_People_Site, :class_name => 'PeopleSite', :foreign_key => 'start_date_type_id'
+    has_many :end_date_type_People_Site, :class_name => 'PeopleSite', :foreign_key => 'end_date_type_id'
 end

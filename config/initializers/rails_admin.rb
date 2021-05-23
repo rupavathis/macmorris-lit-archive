@@ -264,6 +264,18 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Connection' do
+    label 'Bio Connections'
+  end
+  config.model 'EventsPerson' do
+    label 'People to Event Connections'
+  end
+  config.model 'PeopleSite' do
+    label 'People to Site Connections'
+  end
+  config.model 'Attrib' do
+    label 'Attribute'
+  end
   config.model 'Person' do
     # field :id do
     #   column_width 50
@@ -296,26 +308,26 @@ RailsAdmin.config do |config|
       required false
     end
     field :date_of_birth do
-      strftime_format "%Y-%m-%d"
+      strftime_format "%Y"
     end
     field :death_date_type do
       required false
     end
     field :date_of_death do
-      strftime_format "%Y-%m-%d"
+      strftime_format "%Y"
     end
     field :flourishing_date_type do
       required false
     end
     field :flourishing_date do
-      strftime_format "%Y-%m-%d"
+      strftime_format "%Y"
     end
-    field :active_in_ireland_start do
-      strftime_format "%Y-%m-%d"
-    end      
-    field :active_in_ireland_end do
-      strftime_format "%Y-%m-%d"
-    end
+    field :active_in_ireland_start 
+    #   strftime_format "%Y-%m-%d"
+    # end      
+    field :active_in_ireland_end 
+    #   strftime_format "%Y-%m-%d"
+    # end
     # field :religious_order
     # field :attrib do
     #   label 'Attributes/Role' # Change the label of this field
