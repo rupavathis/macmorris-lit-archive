@@ -11,6 +11,5 @@ RUN apt install -y nginx
 ADD ./test.conf /etc/nginx/conf.d/test.conf
 
 EXPOSE 80
-EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]
