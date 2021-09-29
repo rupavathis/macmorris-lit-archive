@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :relationship_types
   resources :relationship_categories
   mount RailsAdmin::Engine => '/admin_panel', as: 'rails_admin'
+  root to: redirect('/admin_panel', status: 302)
   resources :test_models
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

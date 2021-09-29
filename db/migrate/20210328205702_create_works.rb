@@ -14,9 +14,10 @@ class CreateWorks < ActiveRecord::Migration[6.1]
       t.string :shelfmark
       t.references :work_source_library
       t.string :marc_id
-      t.string :bardic_id
+      t.references :bardic_poetry
       t.string :link_uri
       t.string :description
+      t.boolean :is_written_during_years_active
 
       t.timestamps
     end

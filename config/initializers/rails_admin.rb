@@ -174,7 +174,6 @@ RailsAdmin.config do |config|
   # end
 
   config.model 'Work' do
-    include_all_fields
     field :work_id do
       label 'Work ID'
       required true
@@ -184,7 +183,10 @@ RailsAdmin.config do |config|
     end
 
     field :patron_id do
-      label 'Patron/Collaborator'
+      label 'Dedicatee/Patron'
+    end
+    field :printer_id do
+      label 'Printer/Collaborator'
     end
     field :place do
       label 'Location'
@@ -195,9 +197,9 @@ RailsAdmin.config do |config|
     field :display_title do
       required true
     end
-    field :work_date do
-      strftime_format "%Y-%m"
-    end
+    # field :work_date do
+    #   strftime_format "%Y-%m"
+    # end
     field :marc_id do
       label 'MARC ID'
     end
@@ -207,6 +209,8 @@ RailsAdmin.config do |config|
     field :marc_id do
       label 'MARC ID'
     end
+    include_all_fields
+
       # object_label_method do
       # :custom_label_method
   end
@@ -234,12 +238,12 @@ RailsAdmin.config do |config|
     field :gaelic_name do
       label 'Name (Gaelic)'
     end
-    field :start_date do
-      strftime_format "%Y-%m"
-    end  
-    field :end_date do
-      strftime_format ("%Y-%m" || "%Y" || "%Y-%m-%d")
-    end  
+    # field :start_date do
+    #   strftime_format "%Y-%m"
+    # end  
+    # field :end_date do
+    #   strftime_format ("%Y-%m" || "%Y" || "%Y-%m-%d")
+    # end  
     field :place do
       label 'Location'
     end
@@ -268,7 +272,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Connection' do
-    label 'Bio Connections'
+    label 'Connections'
   end
   config.model 'EventsPerson' do
     label 'People to Event Connections'
@@ -306,25 +310,25 @@ RailsAdmin.config do |config|
     field :name_in_religion
     field :other_names
     field :display_name
-    field :gender
+    # field :gender_id
     field :birth_date_type do
       required false
     end
-    field :date_of_birth do
-      strftime_format "%Y"
-    end
-    field :death_date_type do
-      required false
-    end
-    field :date_of_death do
-      strftime_format "%Y"
-    end
+    # field :date_of_birth do
+    #   strftime_format "%Y"
+    # end
+    # field :death_date_type do
+    #   required false
+    # end
+    # field :date_of_death do
+    #   strftime_format "%Y"
+    # end
     field :flourishing_date_type do
       required false
     end
-    field :flourishing_date do
-      strftime_format "%Y"
-    end
+    # field :flourishing_date do
+    #   strftime_format "%Y"
+    # end
     field :active_in_ireland_start 
     #   strftime_format "%Y-%m-%d"
     # end      

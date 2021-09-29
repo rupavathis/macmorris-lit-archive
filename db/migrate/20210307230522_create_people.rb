@@ -14,7 +14,7 @@ class CreatePeople < ActiveRecord::Migration[6.1]
       t.string :name_in_religion
       t.string :other_names
       t.string :display_name, null: false
-      t.string :gender
+      t.references :gender, null: true
       t.references :birth_date_type, null: true
       t.date :date_of_birth
       t.references :birth_place

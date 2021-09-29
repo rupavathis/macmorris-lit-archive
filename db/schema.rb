@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_154547) do
+ActiveRecord::Schema.define(version: 2021_09_15_113405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,9 @@ ActiveRecord::Schema.define(version: 2021_05_21_154547) do
     t.bigint "target_id_id"
     t.bigint "relationship_category_id"
     t.bigint "start_date_type_id"
-    t.date "start_date"
+    t.string "start_date"
     t.bigint "end_date_type_id"
-    t.date "end_date"
+    t.string "end_date"
     t.bigint "time_period_id"
     t.bigint "place_id"
     t.string "reference"
@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 2021_05_21_154547) do
 
   create_table "event_types", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "created_at", null: false
+    t.string "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -92,9 +92,9 @@ ActiveRecord::Schema.define(version: 2021_05_21_154547) do
     t.string "name"
     t.string "gaelic_name"
     t.bigint "start_date_type_id"
-    t.date "start_date"
+    t.string "start_date"
     t.bigint "end_date_type_id"
-    t.date "end_date"
+    t.string "end_date"
     t.bigint "place_id"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_154547) do
     t.string "name_in_religion"
     t.string "other_names"
     t.string "display_name", null: false
-    t.string "gender"
+    t.bigint "gender_id"
     t.bigint "birth_date_type_id"
     t.date "date_of_birth"
     t.bigint "birth_place_id"
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_154547) do
     t.index ["death_place_id"], name: "index_people_on_death_place_id"
     t.index ["flourishing_date_type_id"], name: "index_people_on_flourishing_date_type_id"
     t.index ["flourishing_place_id"], name: "index_people_on_flourishing_place_id"
+    t.index ["gender_id"], name: "index_people_on_gender_id"
     t.index ["religious_order_id"], name: "index_people_on_religious_order_id"
   end
 
@@ -216,9 +217,9 @@ ActiveRecord::Schema.define(version: 2021_05_21_154547) do
     t.bigint "source_id_id"
     t.bigint "target_id_id"
     t.bigint "start_date_type_id"
-    t.date "start_date"
+    t.string "start_date"
     t.bigint "end_date_type_id"
-    t.date "end_date"
+    t.string "end_date"
     t.bigint "time_period_id"
     t.bigint "place_id"
     t.string "reference_text"
@@ -372,19 +373,21 @@ ActiveRecord::Schema.define(version: 2021_05_21_154547) do
     t.text "title"
     t.string "display_title"
     t.bigint "language_id"
-    t.date "work_date"
+    t.string "work_date"
     t.bigint "place_id"
     t.string "visualisation_location"
     t.string "shelfmark"
     t.bigint "work_source_library_id"
     t.string "marc_id"
-    t.string "bardic_id"
+    t.bigint "bardic_poetry_id"
     t.string "link_uri"
     t.string "description"
+    t.boolean "is_written_during_years_active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id_id"], name: "index_works_on_author_id_id"
     t.index ["authorship_id"], name: "index_works_on_authorship_id"
+    t.index ["bardic_poetry_id"], name: "index_works_on_bardic_poetry_id"
     t.index ["language_id"], name: "index_works_on_language_id"
     t.index ["place_id"], name: "index_works_on_place_id"
     t.index ["work_form_id"], name: "index_works_on_work_form_id"

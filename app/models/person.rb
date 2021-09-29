@@ -8,6 +8,7 @@ class Person < ApplicationRecord
   belongs_to :death_date_type, :class_name => 'BirthDeathDateType'
   belongs_to :flourishing_date_type, :class_name => 'BirthDeathDateType'
   belongs_to :religious_order, optional: true
+  belongs_to :gender, optional: true
   has_many :person_author, :class_name => 'Work', :foreign_key => 'author_id'
   has_many :person_source, :class_name => 'EventsPerson', :foreign_key => 'source_id'
   has_many :person_source, :class_name => 'PeopleSites', :foreign_key => 'source_id'
@@ -31,7 +32,7 @@ class Person < ApplicationRecord
   # has_and_belongs_to_many :person_printer, :class_name => 'Work', :foreign_key => 'printer_id'
 
  
-  validate :dates_validation
+  # validate :dates_validation
   validate :isCultural_bool
 
   def dates_validation
