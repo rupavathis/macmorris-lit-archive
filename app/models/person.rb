@@ -1,8 +1,8 @@
 class Person < ApplicationRecord
   # has_many :event, through: :events_people
-  belongs_to :birth_place, :class_name => 'Place', optional: true
-  belongs_to :flourishing_place, :class_name => 'Place', optional: true
-  belongs_to :death_place, :class_name => 'Place', optional: true
+  belongs_to :place_of_birth, :class_name => 'Place', optional: true
+  belongs_to :place_of_flourishing, :class_name => 'Place', optional: true
+  belongs_to :place_of_death, :class_name => 'Place', optional: true
   validates :macmorris_id, format: { with: /m/, message: "ID must start with M" }
   belongs_to :birth_date_type, :class_name => 'BirthDeathDateType'
   belongs_to :death_date_type, :class_name => 'BirthDeathDateType'

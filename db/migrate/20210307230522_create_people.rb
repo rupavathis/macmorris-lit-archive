@@ -16,16 +16,16 @@ class CreatePeople < ActiveRecord::Migration[6.1]
       t.string :display_name, null: false
       t.references :gender, null: true
       t.references :birth_date_type, null: true
-      t.date :date_of_birth
-      t.references :birth_place
+      t.string :date_of_birth
+      t.references :place_of_birth
       t.references :death_date_type, null: true
-      t.date :date_of_death
-      t.references :death_place
+      t.string :date_of_death
+      t.references :place_of_death
       t.references :flourishing_date_type, null: true
-      t.date :flourishing_date
-      t.references :flourishing_place
-      t.date :active_in_ireland_start
-      t.date :active_in_ireland_end
+      t.string :flourishing_date
+      t.references :place_of_flourishing
+      t.string :active_in_ireland_start
+      t.string :active_in_ireland_end
       t.references :religious_order
       t.string :self_described_identity
       t.string :nationality
