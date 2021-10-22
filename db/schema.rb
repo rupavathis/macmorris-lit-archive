@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2021_09_15_113405) do
     t.bigint "target_type_id"
     t.bigint "source_id_id"
     t.bigint "target_id_id"
-    t.bigint "relationship_category_id"
     t.bigint "start_date_type_id"
     t.string "start_date"
     t.bigint "end_date_type_id"
@@ -61,12 +60,12 @@ ActiveRecord::Schema.define(version: 2021_09_15_113405) do
     t.bigint "place_id"
     t.string "reference"
     t.boolean "connection_verified"
-    t.string "poem_id"
+    t.bigint "bardic_poetry_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["bardic_poetry_id"], name: "index_connections_on_bardic_poetry_id"
     t.index ["end_date_type_id"], name: "index_connections_on_end_date_type_id"
     t.index ["place_id"], name: "index_connections_on_place_id"
-    t.index ["relationship_category_id"], name: "index_connections_on_relationship_category_id"
     t.index ["source_id_id"], name: "index_connections_on_source_id_id"
     t.index ["source_type_id"], name: "index_connections_on_source_type_id"
     t.index ["start_date_type_id"], name: "index_connections_on_start_date_type_id"

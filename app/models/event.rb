@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   belongs_to :end_date_type, :class_name => 'BirthDeathDateType', optional: true
   belongs_to :place, optional: true
   has_many :event_target, :class_name => 'EventsPerson', :foreign_key => 'target_id'
-  validate :dates_validation
+  # validate :dates_validation
   def dates_validation
     if !self.start_date.nil? && !self.end_date.nil?
       if self.start_date > self.end_date

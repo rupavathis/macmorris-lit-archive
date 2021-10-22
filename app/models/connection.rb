@@ -9,4 +9,5 @@ class Connection < ApplicationRecord
   belongs_to :place
   belongs_to :relationship_category
   has_and_belongs_to_many :relationship_types
+  belongs_to :bardic_poetry
 end

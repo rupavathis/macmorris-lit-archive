@@ -7,9 +7,9 @@ class CreateEvents < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :gaelic_name
       t.references :start_date_type
-      t.date :start_date
+      t.string :start_date
       t.references :end_date_type
-      t.date :end_date
+      t.string :end_date
       t.references :place, foreign_key: true, null: true 
       t.string :description
       t.timestamps
