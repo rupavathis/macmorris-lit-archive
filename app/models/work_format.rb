@@ -1,0 +1,2 @@
+class WorkFormat < ApplicationRecord
+end

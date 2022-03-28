@@ -1,6 +1,7 @@
 class CreateConnections < ActiveRecord::Migration[6.1]
   def change
     create_table :connections do |t|
+      t.string :connection_id
       t.references :source_type    
       t.references :target_type
       t.references :source_id

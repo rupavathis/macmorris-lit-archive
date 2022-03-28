@@ -42,6 +42,6 @@ module Code
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Session::CookieStore, {:key=>"_code_session"}
     config.active_record.belongs_to_required_by_default = false
-    config.action_controller.default_url_options = { host: 'www.macmorris.ga', port: 80 }
+    # config.action_controller.default_url_options = { host: 'www.macmorris.ga', port: 80 }
   end
 end

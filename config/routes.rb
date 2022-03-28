@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :work_formats
   resources :people_relatives
   resources :people_sites
   resources :events_people

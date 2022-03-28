@@ -1,4 +1,6 @@
 class Connection < ApplicationRecord
+  validates_uniqueness_of :connection_id
+  validates :connection_id, format: { with: /c/, message: "ID must start with c" }
   belongs_to :source_type, :class_name => 'SourceTargetType'
   belongs_to :target_type, :class_name => 'SourceTargetType'
   belongs_to :start_date_type, :class_name => 'BirthDeathDateType'

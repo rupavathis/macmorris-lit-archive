@@ -26,10 +26,9 @@ class Person < ApplicationRecord
   has_and_belongs_to_many :religious_designations
   has_and_belongs_to_many :person_patron, :class_name => 'Work'
   has_and_belongs_to_many :person_printer, :class_name => 'Work'
-  # , :foreign_key => 'patron_id'
-  #  :class_name => 'Work', :foreign_key => 'patron_id'
-  # has_and_belongs_to_many :person_printer, :class_name => 'Work', :foreign_key => 'printer_id'
-  # has_and_belongs_to_many :person_printer, :class_name => 'Work', :foreign_key => 'printer_id'
+  has_and_belongs_to_many :person_publisher, :class_name => 'Work'
+  has_and_belongs_to_many :person_bookseller, :class_name => 'Work'
+  
 
  
   # validate :dates_validation

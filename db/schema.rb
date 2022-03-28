@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_113405) do
+ActiveRecord::Schema.define(version: 2022_03_27_222606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_09_15_113405) do
   end
 
   create_table "connections", force: :cascade do |t|
+    t.string "connection_id"
     t.bigint "source_type_id"
     t.bigint "target_type_id"
     t.bigint "source_id_id"
@@ -352,6 +353,12 @@ ActiveRecord::Schema.define(version: 2021_09_15_113405) do
     t.bigint "work_classification_id", null: false
   end
 
+  create_table "work_formats", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "work_forms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -377,11 +384,17 @@ ActiveRecord::Schema.define(version: 2021_09_15_113405) do
     t.string "visualisation_location"
     t.string "shelfmark"
     t.bigint "work_source_library_id"
+    t.bigint "work_format_id"
     t.string "marc_id"
     t.bigint "bardic_poetry_id"
     t.string "link_uri"
     t.string "description"
-    t.boolean "is_written_during_years_active"
+    t.text "reference"
+    t.boolean "by_irish"
+    t.boolean "while_ireland"
+    t.boolean "about_ireland"
+    t.boolean "printed_in_ireland"
+    t.boolean "bf_af_ireland"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id_id"], name: "index_works_on_author_id_id"
@@ -390,6 +403,7 @@ ActiveRecord::Schema.define(version: 2021_09_15_113405) do
     t.index ["language_id"], name: "index_works_on_language_id"
     t.index ["place_id"], name: "index_works_on_place_id"
     t.index ["work_form_id"], name: "index_works_on_work_form_id"
+    t.index ["work_format_id"], name: "index_works_on_work_format_id"
     t.index ["work_source_library_id"], name: "index_works_on_work_source_library_id"
   end
 

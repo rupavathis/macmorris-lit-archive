@@ -8,16 +8,22 @@ class CreateWorks < ActiveRecord::Migration[6.1]
       t.text :title
       t.string :display_title
       t.references :language
-      t.date :work_date
+      t.string :work_date
       t.references :place
       t.string :visualisation_location
       t.string :shelfmark
       t.references :work_source_library
+      t.references :work_format
       t.string :marc_id
       t.references :bardic_poetry
       t.string :link_uri
       t.string :description
-      t.boolean :is_written_during_years_active
+      t.text :reference
+      t.boolean :by_irish
+      t.boolean :while_ireland
+      t.boolean :about_ireland
+      t.boolean :printed_in_ireland
+      t.boolean :bf_af_ireland
 
       t.timestamps
     end

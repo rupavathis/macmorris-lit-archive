@@ -198,7 +198,7 @@ RailsAdmin.config do |config|
       required true
     end
     # field :work_date do
-    #   strftime_format "%Y-%m"
+    #   strftime_format "%Y"
     # end
     field :marc_id do
       label 'MARC ID'
@@ -209,6 +209,22 @@ RailsAdmin.config do |config|
     field :marc_id do
       label 'MARC ID'
     end
+    field :by_irish do
+      label 'Written by an Irish Actor'
+    end
+    field :while_ireland do
+      label 'Written by an actor while in Ireland '
+    end
+    field :by_irish do
+      label 'Written by an actor about Ireland'
+    end
+    field :printed_in_ireland do
+      label 'Printed in Ireland'
+    end
+    field :bf_af_ireland do
+      label 'Written by an actor bf/af time in Ireland'
+    end
+
     include_all_fields
 
       # object_label_method do
@@ -273,6 +289,11 @@ RailsAdmin.config do |config|
 
   config.model 'Connection' do
     label 'Connections'
+    include_all_fields
+    field :connection_id do
+      label 'Connection ID'
+      required true
+    end
   end
   config.model 'EventsPerson' do
     label 'People to Event Connections'
