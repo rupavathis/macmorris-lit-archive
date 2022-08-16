@@ -36,6 +36,11 @@ Rails.application.routes.draw do
   resources :roles
   resources :relationship_types
   resources :relationship_categories
+
+  get '/people/:id/works', to: 'people#showWorks'
+  get '/names', to: 'people#showNames'
+  get '/people/:id/connections', to: 'people#showConnections'
+  
   mount RailsAdmin::Engine => '/admin_panel', as: 'rails_admin'
   root to: redirect('/admin_panel', status: 302)
   resources :test_models

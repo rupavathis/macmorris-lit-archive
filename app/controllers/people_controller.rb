@@ -10,10 +10,37 @@ class PeopleController < ApplicationController
 
   # GET /people/1
   def show
-    render json: @person
+    render json: @person, include: [languages: {only: :name}, attribs: {only: :name}, gender: {only: :name}, religious_order: {only: :name},
+                                       birth_date_type: {only: :name}, death_date_type: {only: :name}, flourishing_date_type: {only: :name}]
   end
 
-  # POST /people
+   # GET /people/1/works
+  def showWorks
+    # person_new = Person.find(params[:id])
+    # person_id = person_new.id
+    # render json: person_id
+    p = Person.find(params[:id])
+    # person_id = person_new.macmorris_id
+    pn = p.person_author
+    # render json: {id: pn}
+    render json: pn
+  end
+
+  
+  def showNames
+    render json: @people, only: [:macmorris_id, :id, :display_name]
+  end
+
+  def showConnections
+    p = Person.find(params[:id])
+    ps = p.person_source.map{|c| c.target_id}
+    pt = p.person_target.map{|c| c.source_id}
+    pc = pt + ps
+    render json: pc, only: [:macmorris_id, :id, :display_name]
+  end
+
+
+   # POST /people
   def create
     @person = Person.new(person_params)
 

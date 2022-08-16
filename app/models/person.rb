@@ -10,10 +10,10 @@ class Person < ApplicationRecord
   belongs_to :religious_order, optional: true
   belongs_to :gender, optional: true
   has_many :person_author, :class_name => 'Work', :foreign_key => 'author_id'
-  has_many :person_source, :class_name => 'EventsPerson', :foreign_key => 'source_id'
-  has_many :person_source, :class_name => 'PeopleSites', :foreign_key => 'source_id'
+  has_many :event_source, :class_name => 'EventsPerson', :foreign_key => 'source_id'
+  has_many :site_source, :class_name => 'PeopleSites', :foreign_key => 'source_id'
   has_many :person_source, :class_name => 'Connection', :foreign_key => 'source_id'
-  has_many :person_source, :class_name => 'Connection', :foreign_key => 'target_id'
+  has_many :person_target, :class_name => 'Connection', :foreign_key => 'target_id'
   # has_many :person_patron, :class_name => 'Work', :foreign_key => 'patron_id'
   # def custom_label_method
   #   "Author #{macmorris_id}"

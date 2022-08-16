@@ -1,1 +1,0 @@
-exec singularity exec instance://rails_2202 rails $@
