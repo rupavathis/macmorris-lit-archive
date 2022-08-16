@@ -22,13 +22,19 @@ class PeopleController < ApplicationController
     p = Person.find(params[:id])
     # person_id = person_new.macmorris_id
     pn = p.person_author
+    pp = p.person_patron
+    pprinter = p.person_printer
+    pb = p.person_bookseller
+    ppublisher = p.person_publisher
+    pWorks = pn + pp + pprinter +pb +ppublisher
     # render json: {id: pn}
-    render json: pn
+    render json: pWorks
   end
 
   
   def showNames
-    render json: @people, only: [:macmorris_id, :id, :display_name]
+    people = Person.all
+    render json: people, only: [:macmorris_id, :id, :display_name]
   end
 
   def showConnections

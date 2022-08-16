@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get '/people/:id/works', to: 'people#showWorks'
   get '/names', to: 'people#showNames'
   get '/people/:id/connections', to: 'people#showConnections'
+  get '/attribs/roles/:id', to: 'attribs#showRoles'
+  
   
   mount RailsAdmin::Engine => '/admin_panel', as: 'rails_admin'
   root to: redirect('/admin_panel', status: 302)

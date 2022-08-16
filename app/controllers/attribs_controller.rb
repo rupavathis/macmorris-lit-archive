@@ -10,7 +10,13 @@ class AttribsController < ApplicationController
 
   # GET /attribs/1
   def show
-    render json: @attrib
+    render json: @attrib, include: [role: {only: :name}]
+  end
+
+   # GET /attribs/roles/1
+   def showRoles
+    r = Attrib.where(role_id: (params[:id]))
+    render json: r, only: [:id, :name]
   end
 
   # POST /attribs
