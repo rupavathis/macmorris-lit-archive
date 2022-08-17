@@ -39,10 +39,12 @@ class PeopleController < ApplicationController
 
   def showConnections
     p = Person.find(params[:id])
-    ps = p.person_source.map{|c| c.target_id}
-    pt = p.person_target.map{|c| c.source_id}
-    pc = pt + ps
-    render json: pc, only: [:macmorris_id, :id, :display_name]
+    # ps = p.person_source.map{|c| c.target_id}
+    # pt = p.person_target.map{|c| c.source_id}
+    cs = p.person_source
+    ct = p.person_target
+    cc = cs + ct
+    render json: cc, only: :id, include: [:relationship_types, target_id: {only: :name}, source_id: {only: :name}]
   end
 
 
