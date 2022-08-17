@@ -10,7 +10,9 @@ class WorksController < ApplicationController
 
   # GET /works/1
   def show
-    render json: @work
+    render json: @work, include:  [language: {only: :name}, work_classification: {only: :name}, patron_id: {only: :display_name},
+    author_id: {only: :display_name}, printer_id: {only: :display_name},publisher_id: {only: :display_name},bookseller_id: {only: :display_name}
+  ]
   end
 
   # POST /works
