@@ -28,6 +28,7 @@ class Person < ApplicationRecord
   has_and_belongs_to_many :person_printer, :class_name => 'Work'
   has_and_belongs_to_many :person_publisher, :class_name => 'Work'
   has_and_belongs_to_many :person_bookseller, :class_name => 'Work'
+  belongs_to :affiliated_people, :class_name => 'Site'
 
   attribute :name
  

@@ -34,7 +34,7 @@ class PeopleController < ApplicationController
   
   def showNames
     people = Person.all
-    render json: people, only: [:macmorris_id, :id, :display_name]
+    render json: people, only: [:macmorris_id, :id, :display_name, :other_names]
   end
 
   def showConnections
@@ -44,9 +44,29 @@ class PeopleController < ApplicationController
     cs = p.person_source
     ct = p.person_target
     cc = cs + ct
-    render json: cc, only: :id, include: [:relationship_types, target_id: {only: :name}, source_id: {only: :name}]
+    render json: cc, only: :id, include: [:relationship_types, target_id: {only: [:id, :name]}, source_id: {only: [:id, :name]}]
   end
 
+  def showSearch
+    ps = Person.joins(:attribs).where(attribs: {id: params[:attribs]})
+            .joins(:religious_subtypes).where(religious_subtypes: {id: params[:rSubtype]})
+    p = ps.where(gender: params[:gender], religious_order: params[:rOrder])
+
+    render json: p, include: [attribs: {only: :name}, gender: {only: :name}]
+  end
+
+  # # GET people/gender/:gid/rSubtype/:rid/rOrder/:oid/attribs/:aid
+  # def showSearchResults
+  #   rOrder = params[:oid]
+  #   ps = Person.joins(:attribs).where(attribs: {id: params[:aid]}).
+  #         joins(:religious_subtypes).where(religious_subtypes: {id: params[:rid]})
+  #   if rOrder == "nil"
+  #     p = ps.where(gender:params[:gid], religious_order:nil)
+  #   elsif
+  #     p = ps.where(gender:params[:gid], religious_order:rOrder)
+  #   end
+  #   render json: p, include: [attribs: {only: :name}, gender: {only: :name}]
+  # end
 
    # POST /people
   def create

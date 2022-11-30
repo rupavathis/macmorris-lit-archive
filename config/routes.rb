@@ -41,8 +41,8 @@ Rails.application.routes.draw do
   get '/names', to: 'people#showNames'
   get '/people/:id/connections', to: 'people#showConnections'
   get '/attribs/roles/:id', to: 'attribs#showRoles'
-  
-  
+  get '/search/people', to: 'people#showSearch'
+
   mount RailsAdmin::Engine => '/admin_panel', as: 'rails_admin'
   root to: redirect('/admin_panel', status: 302)
   resources :test_models

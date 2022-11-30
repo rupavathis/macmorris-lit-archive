@@ -265,27 +265,27 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'Site' do
-    # exclude_fields :id
-    include_all_fields
-    field :site_id do
-      label 'Site ID'
-      required true
-    end
-    field :site_type do
-      # required false
-    end
-    field :name do
-      label 'Name (English)'
-    end
-    field :gaelic_name do
-      label 'Name (Gaelic)'
-    end
-    field :place do
-      label 'Location'
-      # required false
-    end
-  end
+  # config.model 'Site' do
+  #   # exclude_fields :id
+  #   include_all_fields
+  #   field :site_id do
+  #     label 'Site ID'
+  #     required true
+  #   end
+  #   field :site_type do
+  #     # required false
+  #   end
+  #   field :name do
+  #     label 'Name (English)'
+  #   end
+  #   field :gaelic_name do
+  #     label 'Name (Gaelic)'
+  #   end
+  #   field :place do
+  #     label 'Location'
+  #     # required false
+  #   end
+  # end
 
   config.model 'Connection' do
     label 'Connections'
