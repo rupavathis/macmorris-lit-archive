@@ -15,6 +15,14 @@ class WorksController < ApplicationController
   ]
   end
 
+  def showSearch
+    wc = Work.joins(:work_classification).where(work_classifications: {id: params[:wClassification]})
+    wl = Work.where(language: params[:language]).or(Work.where(work_format: params[:wFormat])).or(Work.where(place: params[:place])).or(Work.where(display_title: params[:title]))
+
+    query_results = wc.or(wl)    
+    render json: query_results
+ end
+
   # POST /works
   def create
     @work = Work.new(work_params)

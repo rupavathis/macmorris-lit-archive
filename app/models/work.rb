@@ -1,5 +1,5 @@
 class Work < ApplicationRecord
-  validates_uniqueness_of :work_id
+  # validates_uniqueness_of :work_id
   validates :work_id, format: { with: /w/, message: "ID must start with w" }
   belongs_to :author_id, :class_name => 'Person'
   belongs_to :authorship, optional: true
