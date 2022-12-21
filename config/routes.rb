@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
+  resources :sites
   resources :work_formats
-  resources :people_relatives
-  resources :people_sites
-  resources :events_people
   resources :work_details
   resources :connections
   resources :time_periods
@@ -12,11 +10,7 @@ Rails.application.routes.draw do
   resources :create_languages_people_join_tables
   resources :create_join_table_people_languages
   resources :add_people_ref_to_languages
-  resources :event_tests
-  resources :sites
   resources :site_types
-  resources :events
-  resources :event_types
   resources :works
   resources :authorships
   resources :work_source_libraries

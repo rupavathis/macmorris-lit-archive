@@ -5,8 +5,6 @@ class Work < ApplicationRecord
   belongs_to :authorship, optional: true
   belongs_to :work_form, optional: true
   belongs_to :work_format, optional: true
-  belongs_to :language, optional: true
-  belongs_to :place, optional: true
   belongs_to :bardic_poetry, optional: true
   belongs_to :work_source_library, optional: true
   has_and_belongs_to_many :patron_id, :class_name => 'Person'
@@ -14,4 +12,6 @@ class Work < ApplicationRecord
   has_and_belongs_to_many :publisher_id, :class_name => 'Person'
   has_and_belongs_to_many :bookseller_id, :class_name => 'Person'
   has_and_belongs_to_many :work_classification, :class_name => 'WorkClassification'
+  has_and_belongs_to_many :places, :class_name => 'Place'
+  has_and_belongs_to_many :languages
 end

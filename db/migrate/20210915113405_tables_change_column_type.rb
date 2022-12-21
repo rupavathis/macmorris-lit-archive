@@ -28,12 +28,6 @@ class TablesChangeColumnType < ActiveRecord::Migration[6.1]
         dir.up   { t.change :end_date, :string }
         dir.down { t.change :end_date, :date }
       end
-      change_table :people_sites do |t|
-        dir.up   { t.change :start_date, :string }
-        dir.down { t.change :start_date, :date }
-        dir.up   { t.change :end_date, :string }
-        dir.down { t.change :end_date, :date }
-      end
       change_table :people do |t|
         dir.up   { t.change :date_of_birth, :string }
         dir.down { t.change :date_of_birth, :date }
@@ -45,18 +39,6 @@ class TablesChangeColumnType < ActiveRecord::Migration[6.1]
         dir.down { t.change :active_in_ireland_start, :date }
         dir.up   { t.change :active_in_ireland_end, :string }
         dir.down { t.change :active_in_ireland_end, :date }
-      end
-      change_table :events_people do |t|
-        dir.up   { t.change :start_date, :string }
-        dir.down { t.change :start_date, :date }
-        dir.up   { t.change :end_date, :string }
-        dir.down { t.change :end_date, :date }
-      end
-      change_table :events do |t|
-        dir.up   { t.change :start_date, :string }
-        dir.down { t.change :start_date, :date }
-        dir.up   { t.change :end_date, :string }
-        dir.down { t.change :end_date, :date }
       end
     end
   end

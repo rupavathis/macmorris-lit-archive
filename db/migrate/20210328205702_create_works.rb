@@ -7,9 +7,7 @@ class CreateWorks < ActiveRecord::Migration[6.1]
       t.references :work_form
       t.text :title
       t.string :display_title
-      t.references :language
       t.string :work_date
-      t.references :place
       t.string :visualisation_location
       t.string :shelfmark
       t.references :work_source_library

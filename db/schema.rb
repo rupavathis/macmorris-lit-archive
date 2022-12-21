@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_27_222606) do
+ActiveRecord::Schema.define(version: 2022_12_21_204129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,55 +80,6 @@ ActiveRecord::Schema.define(version: 2022_03_27_222606) do
     t.bigint "relationship_type_id", null: false
   end
 
-  create_table "event_types", force: :cascade do |t|
-    t.string "name"
-    t.string "created_at", null: false
-    t.string "updated_at", null: false
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string "event_id"
-    t.bigint "event_type_id"
-    t.string "name"
-    t.string "gaelic_name"
-    t.bigint "start_date_type_id"
-    t.string "start_date"
-    t.bigint "end_date_type_id"
-    t.string "end_date"
-    t.bigint "place_id"
-    t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_date_type_id"], name: "index_events_on_end_date_type_id"
-    t.index ["event_type_id"], name: "index_events_on_event_type_id"
-    t.index ["place_id"], name: "index_events_on_place_id"
-    t.index ["start_date_type_id"], name: "index_events_on_start_date_type_id"
-  end
-
-  create_table "events_people", force: :cascade do |t|
-    t.bigint "source_type_id"
-    t.bigint "target_type_id"
-    t.bigint "source_id_id"
-    t.bigint "target_id_id"
-    t.bigint "start_date_type_id"
-    t.string "start_date"
-    t.bigint "end_date_type_id"
-    t.string "end_date"
-    t.bigint "time_period_id"
-    t.bigint "place_id"
-    t.string "reference_text"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_date_type_id"], name: "index_events_people_on_end_date_type_id"
-    t.index ["place_id"], name: "index_events_people_on_place_id"
-    t.index ["source_id_id"], name: "index_events_people_on_source_id_id"
-    t.index ["source_type_id"], name: "index_events_people_on_source_type_id"
-    t.index ["start_date_type_id"], name: "index_events_people_on_start_date_type_id"
-    t.index ["target_id_id"], name: "index_events_people_on_target_id_id"
-    t.index ["target_type_id"], name: "index_events_people_on_target_type_id"
-    t.index ["time_period_id"], name: "index_events_people_on_time_period_id"
-  end
-
   create_table "events_people_relationship_types", id: false, force: :cascade do |t|
     t.bigint "events_person_id", null: false
     t.bigint "relationship_type_id", null: false
@@ -148,6 +99,11 @@ ActiveRecord::Schema.define(version: 2022_03_27_222606) do
 
   create_table "languages_people", id: false, force: :cascade do |t|
     t.bigint "person_id", null: false
+    t.bigint "language_id", null: false
+  end
+
+  create_table "languages_works", id: false, force: :cascade do |t|
+    t.bigint "work_id", null: false
     t.bigint "language_id", null: false
   end
 
@@ -211,38 +167,9 @@ ActiveRecord::Schema.define(version: 2022_03_27_222606) do
     t.bigint "religious_subtype_id", null: false
   end
 
-  create_table "people_sites", force: :cascade do |t|
-    t.bigint "source_type_id"
-    t.bigint "target_type_id"
-    t.bigint "source_id_id"
-    t.bigint "target_id_id"
-    t.bigint "start_date_type_id"
-    t.string "start_date"
-    t.bigint "end_date_type_id"
-    t.string "end_date"
-    t.bigint "time_period_id"
-    t.bigint "place_id"
-    t.string "reference_text"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_date_type_id"], name: "index_people_sites_on_end_date_type_id"
-    t.index ["place_id"], name: "index_people_sites_on_place_id"
-    t.index ["source_id_id"], name: "index_people_sites_on_source_id_id"
-    t.index ["source_type_id"], name: "index_people_sites_on_source_type_id"
-    t.index ["start_date_type_id"], name: "index_people_sites_on_start_date_type_id"
-    t.index ["target_id_id"], name: "index_people_sites_on_target_id_id"
-    t.index ["target_type_id"], name: "index_people_sites_on_target_type_id"
-    t.index ["time_period_id"], name: "index_people_sites_on_time_period_id"
-  end
-
-  create_table "people_sites_relationship_types", id: false, force: :cascade do |t|
-    t.bigint "people_site_id", null: false
-    t.bigint "relationship_type_id", null: false
-  end
-
-  create_table "people_work_details", id: false, force: :cascade do |t|
+  create_table "people_sites", id: false, force: :cascade do |t|
     t.bigint "person_id", null: false
-    t.bigint "work_detail_id", null: false
+    t.bigint "site_id", null: false
   end
 
   create_table "people_works", id: false, force: :cascade do |t|
@@ -269,6 +196,11 @@ ActiveRecord::Schema.define(version: 2022_03_27_222606) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["place_type_id"], name: "index_places_on_place_type_id"
+  end
+
+  create_table "places_works", id: false, force: :cascade do |t|
+    t.bigint "work_id", null: false
+    t.bigint "place_id", null: false
   end
 
   create_table "relationship_categories", force: :cascade do |t|
@@ -323,9 +255,13 @@ ActiveRecord::Schema.define(version: 2022_03_27_222606) do
     t.string "name"
     t.string "gaelic_name"
     t.bigint "place_id"
-    t.string "description"
+    t.text "description"
+    t.text "gaelic_decription"
+    t.string "reference_text"
+    t.bigint "bardic_poetry_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["bardic_poetry_id"], name: "index_sites_on_bardic_poetry_id"
     t.index ["place_id"], name: "index_sites_on_place_id"
     t.index ["site_type_id"], name: "index_sites_on_site_type_id"
   end
@@ -378,9 +314,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_222606) do
     t.bigint "work_form_id"
     t.text "title"
     t.string "display_title"
-    t.bigint "language_id"
     t.string "work_date"
-    t.bigint "place_id"
     t.string "visualisation_location"
     t.string "shelfmark"
     t.bigint "work_source_library_id"
@@ -400,23 +334,16 @@ ActiveRecord::Schema.define(version: 2022_03_27_222606) do
     t.index ["author_id_id"], name: "index_works_on_author_id_id"
     t.index ["authorship_id"], name: "index_works_on_authorship_id"
     t.index ["bardic_poetry_id"], name: "index_works_on_bardic_poetry_id"
-    t.index ["language_id"], name: "index_works_on_language_id"
-    t.index ["place_id"], name: "index_works_on_place_id"
     t.index ["work_form_id"], name: "index_works_on_work_form_id"
     t.index ["work_format_id"], name: "index_works_on_work_format_id"
     t.index ["work_source_library_id"], name: "index_works_on_work_source_library_id"
   end
 
   add_foreign_key "attribs", "roles"
-  add_foreign_key "events", "event_types"
-  add_foreign_key "events", "places"
-  add_foreign_key "events_people", "places"
-  add_foreign_key "events_people", "time_periods"
-  add_foreign_key "people_sites", "places"
-  add_foreign_key "people_sites", "time_periods"
   add_foreign_key "places", "place_types"
   add_foreign_key "relationship_types", "relationship_categories"
   add_foreign_key "religious_subtypes", "religious_designations"
+  add_foreign_key "sites", "bardic_poetries"
   add_foreign_key "sites", "places"
   add_foreign_key "sites", "site_types"
 end

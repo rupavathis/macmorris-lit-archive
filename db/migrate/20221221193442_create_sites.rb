@@ -3,12 +3,13 @@ class CreateSites < ActiveRecord::Migration[6.1]
     create_table :sites do |t|
       t.string :site_id
       t.references :site_type, foreign_key: true
-      # , null: false,
       t.string :name
       t.string :gaelic_name
       t.references :place, foreign_key: true
-      # null: false,
-      t.string :description
+      t.text :description
+      t.text :gaelic_decription
+      t.string :reference_text
+      t.references :bardic_poetry, foreign_key: true
 
       t.timestamps
     end

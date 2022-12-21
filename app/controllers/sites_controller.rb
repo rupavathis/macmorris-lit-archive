@@ -5,7 +5,7 @@ class SitesController < ApplicationController
   def index
     @sites = Site.all
 
-    render json: @sites
+    render json: @sites, include: [place: {only: [:name, :latitude, :longitude]}]
   end
 
   # GET /sites/1
@@ -46,6 +46,6 @@ class SitesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def site_params
-      params.require(:site).permit(:site_id, :site_type_id, :name_in_EN, :name_in_GA, :place_id, :desc)
+      params.require(:site).permit(:site_id, :site_type_id, :name, :gaelic_name, :place_id, :description, :gaelic_decription, :reference_text, :bardic_poetry_id)
     end
 end

@@ -3,15 +3,21 @@
 one:
   site_id: MyString
   site_type: one
-  name_in_EN: MyString
-  name_in_GA: MyString
+  name: MyString
+  gaelic_name: MyString
   place: one
-  desc: MyString
+  description: MyText
+  gaelic_decription: MyText
+  reference_text: MyString
+  bardic_poetry: one
 
 two:
   site_id: MyString
   site_type: two
-  name_in_EN: MyString
-  name_in_GA: MyString
+  name: MyString
+  gaelic_name: MyString
   place: two
-  desc: MyString
+  description: MyText
+  gaelic_decription: MyText
+  reference_text: MyString
+  bardic_poetry: two

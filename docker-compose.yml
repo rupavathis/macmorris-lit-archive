@@ -10,16 +10,26 @@ services:
     environment:
       POSTGRES_PASSWORD: macmorris
   web:
-    build: .
+    build: 
+      dockerfile: Dockerfile
+      args:
+        - UID=${UID}
+        - GID=${GID}
+        - UNAME=${UNAME}
     # command: bin/rails server -p 3000 --binding 0.0.0.0
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
     # command: bundle exec rails s -p 3000 -b 0.0.0.0
     ports:
       - "3000:3000"
     depends_on:
       - db
-    # volumes:
-    #   - .:/app
+    user: ${UID}:${GID}
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
   # nginx:
   #   image: nginx:1.0
   #   # container_name: nginx-ser

@@ -12,7 +12,7 @@ class SitesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create site" do
     assert_difference('Site.count') do
-      post sites_url, params: { site: { desc: @site.desc, name_in_EN: @site.name_in_EN, name_in_GA: @site.name_in_GA, place_id: @site.place_id, site_id: @site.site_id, site_type_id: @site.site_type_id } }, as: :json
+      post sites_url, params: { site: { bardic_poetry_id: @site.bardic_poetry_id, description: @site.description, gaelic_decription: @site.gaelic_decription, gaelic_name: @site.gaelic_name, name: @site.name, place_id: @site.place_id, reference_text: @site.reference_text, site_id: @site.site_id, site_type_id: @site.site_type_id } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class SitesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update site" do
-    patch site_url(@site), params: { site: { desc: @site.desc, name_in_EN: @site.name_in_EN, name_in_GA: @site.name_in_GA, place_id: @site.place_id, site_id: @site.site_id, site_type_id: @site.site_type_id } }, as: :json
+    patch site_url(@site), params: { site: { bardic_poetry_id: @site.bardic_poetry_id, description: @site.description, gaelic_decription: @site.gaelic_decription, gaelic_name: @site.gaelic_name, name: @site.name, place_id: @site.place_id, reference_text: @site.reference_text, site_id: @site.site_id, site_type_id: @site.site_type_id } }, as: :json
     assert_response 200
   end
 

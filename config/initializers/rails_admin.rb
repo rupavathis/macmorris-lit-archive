@@ -142,12 +142,7 @@ RailsAdmin.config do |config|
   #     required true
   #   end
   # end
-  # config.model 'EventType' do
-  #   include_all_fields
-  #   field :name do
-  #     required true
-  #   end
-  # end
+  
   # config.model 'BirthDeathDateType' do
   #   include_all_fields
   #   field :name do
@@ -188,7 +183,7 @@ RailsAdmin.config do |config|
     field :printer_id do
       label 'Printer/Collaborator'
     end
-    field :place do
+    field :places do
       label 'Location'
     end
     field :description do
@@ -241,29 +236,6 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model 'Event' do
-    # exclude_fields :id
-    include_all_fields
-    field :event_id do
-      label 'Event ID'
-      required true
-    end
-    # field :name_in_EN do
-    #   label 'Name (English)'
-    # end
-    field :gaelic_name do
-      label 'Name (Gaelic)'
-    end
-    # field :start_date do
-    #   strftime_format "%Y-%m"
-    # end  
-    # field :end_date do
-    #   strftime_format ("%Y-%m" || "%Y" || "%Y-%m-%d")
-    # end  
-    field :place do
-      label 'Location'
-    end
-  end
 
   # config.model 'Site' do
   #   # exclude_fields :id
@@ -294,9 +266,6 @@ RailsAdmin.config do |config|
       label 'Connection ID'
       required true
     end
-  end
-  config.model 'EventsPerson' do
-    label 'People to Event Connections'
   end
   config.model 'PeopleSite' do
     label 'People to Site Connections'
