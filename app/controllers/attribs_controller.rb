@@ -5,7 +5,7 @@ class AttribsController < ApplicationController
   def index
     @attribs = Attrib.all
 
-    render json: @attribs
+    render json: @attribs,  only: [:id, :name], include: [role: {only: [:name]}]
   end
 
   # GET /attribs/1

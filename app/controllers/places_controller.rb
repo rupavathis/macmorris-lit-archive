@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
   def index
     @places = Place.all
 
-    render json: @places
+    render json: @places, include: [place_type: {only: [:name]}]
   end
 
   # GET /places/1
