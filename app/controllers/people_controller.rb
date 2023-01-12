@@ -55,6 +55,12 @@ class PeopleController < ApplicationController
     render json: p, include: [attribs: {only: :name}, gender: {only: :name}]
   end
 
+  # GET filterData/1,2,3
+  def filterData
+    p = Person.where(id: (params[:ids]).split(','))
+    render json: p, only: :id, include: [attribs: {only: :id}, gender: {only: :id}, religious_designations: {only: :id}]
+  end
+
   # # GET people/gender/:gid/rSubtype/:rid/rOrder/:oid/attribs/:aid
   # def showSearchResults
   #   rOrder = params[:oid]

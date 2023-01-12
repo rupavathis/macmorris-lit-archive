@@ -5,7 +5,7 @@ class WorksController < ApplicationController
   def index
     @works = Work.all
 
-    render json: @works
+    render json: @works, include: [author_id: {only: [:id, :display_name]}]
   end
 
   # GET /works/1
