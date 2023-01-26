@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :authorship_types
   resources :sites
   resources :work_formats
   resources :work_details
@@ -43,8 +44,10 @@ Rails.application.routes.draw do
   get '/showWorkAuthorConnections/:id', to: 'connections#showWorkAuthorConnections'
   get '/advancedPeopleSearch', to: 'connections#advancedPeopleSearch'
   get '/filterData/*ids', to: 'people#filterData'
+  get '/filterWorkData/*ids', to: 'works#filterData'
   get '/advancedWorkSearch', to: 'connections#advancedWorkSearch'
-
+  get '/worksPeopleSearch', to: 'works#advancedWorkPeople'
+  get '/titles', to: 'works#titles'
 
   mount RailsAdmin::Engine => '/admin_panel', as: 'rails_admin'
   root to: redirect('/admin_panel', status: 302)

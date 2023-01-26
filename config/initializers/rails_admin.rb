@@ -267,9 +267,7 @@ RailsAdmin.config do |config|
       required true
     end
   end
-  config.model 'PeopleSite' do
-    label 'People to Site Connections'
-  end
+  
   config.model 'Attrib' do
     label 'Attribute'
   end
@@ -351,6 +349,8 @@ RailsAdmin.config do |config|
     end
     field :sdfb do
       label 'SDFB'
+    end
+    field :authorship_types do
     end
     exclude_fields :person_author
     exclude_fields :person_patron

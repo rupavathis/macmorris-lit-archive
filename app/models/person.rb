@@ -20,6 +20,7 @@ class Person < ApplicationRecord
   has_and_belongs_to_many :person_publisher, :class_name => 'Work'
   has_and_belongs_to_many :person_bookseller, :class_name => 'Work'
   has_and_belongs_to_many :sites
+  has_and_belongs_to_many :authorship_types
   attribute :name
   
   # validate :dates_validation

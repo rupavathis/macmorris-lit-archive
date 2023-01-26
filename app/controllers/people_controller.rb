@@ -10,8 +10,10 @@ class PeopleController < ApplicationController
 
   # GET /people/1
   def show
-    render json: @person, include: [languages: {only: :name}, attribs: {only: :name}, gender: {only: :name}, religious_order: {only: :name},
-                                       birth_date_type: {only: :name}, death_date_type: {only: :name}, flourishing_date_type: {only: :name}]
+    render json: @person, include: [languages: {only: :name}, attribs: {only: :name}, gender: {only: :name},
+                                     religious_order: {only: :name},
+                                      birth_date_type: {only: :name}, death_date_type: {only: :name}, 
+                                       flourishing_date_type: {only: :name}]
   end
 
    # GET /people/1/works
@@ -34,7 +36,8 @@ class PeopleController < ApplicationController
   
   def showNames
     people = Person.all
-    render json: people, only: [:macmorris_id, :id, :display_name, :other_names]
+    render json: people, only: [:macmorris_id, :id, :display_name, :other_names, :date_of_birth, :date_of_death, 
+    :flourishing_date]
   end
 
   def showConnections
@@ -58,7 +61,8 @@ class PeopleController < ApplicationController
   # GET filterData/1,2,3
   def filterData
     p = Person.where(id: (params[:ids]).split(','))
-    render json: p, only: :id, include: [attribs: {only: :id}, gender: {only: :id}, religious_designations: {only: :id}]
+    render json: p, only: [:name, :religious_order_id], include: [attribs: {only: [:id, :name]}, gender: {only: :id}, 
+    religious_designations: {only: :id}]
   end
 
   # # GET people/gender/:gid/rSubtype/:rid/rOrder/:oid/attribs/:aid

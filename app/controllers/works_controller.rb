@@ -5,7 +5,23 @@ class WorksController < ApplicationController
   def index
     @works = Work.all
 
-    render json: @works, include: [author_id: {only: [:id, :display_name]}]
+    render json: @works,include:  [work_classification: {only: :name}, patron_id: {only: [:id, :display_name]},
+    author_id: {only: :display_name}, printer_id: {only: [:id, :display_name]},
+    publisher_id: {only: [:id, :display_name]},bookseller_id: {only: [:id, :display_name]}
+  ]
+  end
+
+   # GET /titles
+   def titles
+    works = Work.all
+    render json: works, only:  [:id, :work_id, :display_title]
+  end
+
+
+  def showNames
+    people = Person.all
+    render json: people, only: [:macmorris_id, :id, :display_name, :other_names, :date_of_birth, :date_of_death, 
+    :flourishing_date]
   end
 
   # GET /works/1
@@ -22,6 +38,46 @@ class WorksController < ApplicationController
     query_results = wc.or(wl)    
     render json: query_results
  end
+
+  # GET filterWorkData/1,2,3
+  def filterData
+    w = Work.where(id: (params[:ids]).split(','))
+    render json: w, include:  [places: {only: :id}, languages: {only: :id}, work_classification: {only: :id}]
+  end
+
+ # GET worksPeopleSearch?authors=1822&patrons=3935&printers=3935&publishers=3935&booksellers=3935
+  def advancedWorkPeople
+ 
+    if(params[:authors].present? && !params[:patrons].present? && !params[:printers].present? &&
+      !params[:booksellers].present? && !params[:publishers].present?) then
+        w = Work.where(author_id_id: params[:authors])
+    else   
+      w = Work.joins(:printer_id, :patron_id, :publisher_id, :bookseller_id)  
+      if (params[:authors].present?) then
+        w = w.where(author_id_id: params[:authors])
+      end
+      if (params[:patrons].present?) then
+          w = w.where(patron_id: {id: params[:patrons]})
+      end
+      if (params[:printers].present?) then
+        w = w.where(printer_id: {id: params[:printers]})
+      end
+      if (params[:booksellers].present?) then
+        w = w.where(bookseller_id: {id: params[:booksellers]})
+      end
+      if (params[:publishers].present?) then
+        w = w.where(publisher_id: {id: params[:publishers]})
+      end
+    end
+
+    # wnext =  Work.where(author_id_id: params[:authors])
+    # wpatron = Work.joins(:patron_id).where(patron_id: {id: params[:patrons]})
+    # output =  [wnext,wpatron]
+
+    render json: [w], include: [author_id: {only: :name}, patron_id: {only: [:id, :name]},
+    printer_id: {only: [:id, :name]},publisher_id: {only: [:id, :name]},
+    bookseller_id: {only: [:id, :name]}]
+  end
 
   # POST /works
   def create
