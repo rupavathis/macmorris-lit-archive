@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   get '/names', to: 'people#showNames'
   get '/people/:id/connections', to: 'people#showConnections'
   get '/attribs/roles/:id', to: 'attribs#showRoles'
-  get '/search/people', to: 'people#showSearch'
   get '/search/works', to: 'works#showSearch'
   get '/showConnections', to: 'connections#showConnections'
   get '/showConnection/*ids', to: 'connections#showConnection'
@@ -48,6 +47,14 @@ Rails.application.routes.draw do
   get '/advancedWorkSearch', to: 'connections#advancedWorkSearch'
   get '/worksPeopleSearch', to: 'works#advancedWorkPeople'
   get '/titles', to: 'works#titles'
+  get '/profile/:id', to: 'people#showProfile'
+
+  get 'search/people/:id', to: 'people#showPeopleSearch'
+  get 'search/works/:id', to: 'works#showWorksSearch'
+  get 'advancedSearch/people', to: 'people#showAdvancedPeopleSearch'
+  get 'advancedSearch/works', to: 'works#showAdvancedWorksSearch'
+
+
 
   mount RailsAdmin::Engine => '/admin_panel', as: 'rails_admin'
   root to: redirect('/admin_panel', status: 302)

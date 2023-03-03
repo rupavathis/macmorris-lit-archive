@@ -11,6 +11,17 @@ class WorksController < ApplicationController
   ]
   end
 
+  # GET /search/works/1
+  def showWorksSearch
+    works = Work.find(params[:id])
+
+    render json: [works],include:  [work_classification: {only: :name}, patron_id: {only: [:id, :display_name]},
+    author_id: {only: :display_name}, printer_id: {only: [:id, :display_name]},
+    publisher_id: {only: [:id, :display_name]},bookseller_id: {only: [:id, :display_name]}
+  ]
+  end
+
+    
    # GET /titles
    def titles
     works = Work.all
@@ -44,6 +55,36 @@ class WorksController < ApplicationController
     w = Work.where(id: (params[:ids]).split(','))
     render json: w, include:  [places: {only: :id}, languages: {only: :id}, work_classification: {only: :id}]
   end
+
+   # GET /advancedSearch/works?wFormat=1&language=1&wClassification=1&place=1&bardic=yes
+   def showAdvancedWorksSearch
+
+    # wc = Work.joins(:work_classification).where(work_classifications: {id: params[:wClassification]})
+    # wl = Work.where(language: params[:language]).or(Work.where(work_format: params[:wFormat])).or(Work.where(place: params[:place])).or(Work.where(display_title: params[:title]))
+
+    wAll = Work.all
+    if (params[:wFormat].present?) then
+      wAll = wAll.where(work_format: params[:wFormat])
+    end
+
+    if (params[:language].present?) then
+      wAll = wAll.joins(:languages).where(languages: params[:language])
+    end
+
+    if (params[:wClassification].present?) then
+      wAll = wAll.joins(:work_classification).where(work_classifications: {id: params[:wClassification]})
+    end
+
+    if (params[:place].present?) then
+      wAll = wAll.joins(:places).where(places:params[:place])
+    end
+
+    render json: wAll, only:  [:id, :work_id, :display_title, :work_date], include:  [languages: {only: :id},
+    author_id: {only: :id}]
+    # , include:  [places: {only: :id}, languages: {only: :id}, work_classification: {only: :id}]
+
+  end
+
 
  # GET worksPeopleSearch?authors=1822&patrons=3935&printers=3935&publishers=3935&booksellers=3935
   def advancedWorkPeople

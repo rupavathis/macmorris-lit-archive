@@ -19,7 +19,8 @@ class ConnectionsController < ApplicationController
     degree1Targets = Connection.where(source_id_id: params[:ids].split(','))
     degree1Sources = degree1Targets.map { |element| element.target_id_id }
     degree2Targets = Connection.where(source_id_id: degree1Sources)
-    render json: [degree1Targets, degree2Targets], include: [target_id: {only: :name}, source_id: {only: :name}]
+    # render json: [degree1Targets, degree2Targets], include: [target_id: {only: :name}, source_id: {only: :name}]
+    render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id]
   end
 
   # GET /showROrderConnections/1
@@ -132,29 +133,29 @@ class ConnectionsController < ApplicationController
       degree2Sources = degree1Targets.map { |element| element.target_id_id }
       degree2Targets = Connection.distinct.where(source_id_id: degree2Sources)
   
-      render json: [degree1Targets, degree2Targets], include: [target_id: {only: :name}, source_id: {only: :name}]
+      render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id]
   end
   
 
-  # GET /showWorkTitleConnections/1
-  def showWorkTitleConnections
-    w1 = Work.where(id: params[:id])
-    w2 = w1.map {|element| element.author_id_id }
-    w3 = Work.where(author_id_id: w2)  
-    printers = w1.map { |element| element.printer_id.ids }
-    w4 = Work.distinct.joins(:printer_id).where(printer_id: {id: printers.flatten(1)})
-    patrons = w1.map { |element| element.patron_id.ids }
-    w5 = Work.distinct.joins(:patron_id).where(patron_id: {id: patrons.flatten(1)})
-    booksellers = w1.map { |element| element.bookseller_id.ids }
-    w6 = Work.distinct.joins(:bookseller_id).where(bookseller_id: {id: booksellers.flatten(1)})
-    publishers = w1.map { |element| element.publisher_id.ids }
-    w7 = Work.distinct.joins(:publisher_id).where(publisher_id: {id: publishers.flatten(1)})
+  # # GET /showWorkTitleConnections/1
+  # def showWorkTitleConnections
+  #   w1 = Work.where(id: params[:id])
+  #   w2 = w1.map {|element| element.author_id_id }
+  #   w3 = Work.where(author_id_id: w2)  
+  #   printers = w1.map { |element| element.printer_id.ids }
+  #   w4 = Work.distinct.joins(:printer_id).where(printer_id: {id: printers.flatten(1)})
+  #   patrons = w1.map { |element| element.patron_id.ids }
+  #   w5 = Work.distinct.joins(:patron_id).where(patron_id: {id: patrons.flatten(1)})
+  #   booksellers = w1.map { |element| element.bookseller_id.ids }
+  #   w6 = Work.distinct.joins(:bookseller_id).where(bookseller_id: {id: booksellers.flatten(1)})
+  #   publishers = w1.map { |element| element.publisher_id.ids }
+  #   w7 = Work.distinct.joins(:publisher_id).where(publisher_id: {id: publishers.flatten(1)})
 
-    w = w3 + w4 + w5 + w6 + w7
-    render json: [w1, w], include: [author_id: {only: :name}, patron_id: {only: [:id, :display_name]},
-                printer_id: {only: [:id, :display_name]},publisher_id: {only: [:id, :display_name]},
-                bookseller_id: {only: [:id, :display_name]}]
-  end
+  #   w = w3 + w4 + w5 + w6 + w7
+  #   render json: [w1, w], include: [author_id: {only: :name}, patron_id: {only: [:id, :display_name]},
+  #               printer_id: {only: [:id, :display_name]},publisher_id: {only: [:id, :display_name]},
+  #               bookseller_id: {only: [:id, :display_name]}]
+  # end
 
   # GET /connections/1
   def show
@@ -185,6 +186,20 @@ class ConnectionsController < ApplicationController
 
   # end
 
+    # GET /showWorkTitleConnections/1
+    def showWorkTitleConnections
+    o1 = Work.find(params[:id])
+    p0 = getPeople(o1)
+    o2 = p0.map{ |e| (getWorks(e))}.flatten().uniq
+    render json: [[o1],o2], 
+      only: [:id, :work_id, :display_title, :author_id_id ], 
+      methods: [
+        :patron_id_ids,
+        :printer_id_ids,
+        :publisher_id_ids,
+        :bookseller_id_ids
+    ]
+    end
 
     def getWorks(p)
       return  p.person_author + p.person_printer.or(p.person_patron).or(p.person_publisher).or(p.person_bookseller)
@@ -206,19 +221,19 @@ class ConnectionsController < ApplicationController
       render json: [o1,o2], 
       # render json: o1, 
         only: [:id, :work_id, :display_title, :author_id_id ], 
-        include: [
-          author_id: {only: [:id,:name]},
-          # patron_id: {only: [:id, :display_name]}, 
-          printer_id: {only: [:id, :display_name]},
-          publisher_id: {only: [:id, :display_name]},
-          bookseller_id: {only: [:id, :display_name]},
-        ]
-      #   methods: [
-      #     :patron_id_ids,
-      #     :printer_id_ids,
-      #     :publisher_id_ids,
-      #     :bookseller_id_ids
-      # ]
+        # include: [
+        #   author_id: {only: [:id,:name]},
+        #   # patron_id: {only: [:id, :display_name]}, 
+        #   printer_id: {only: [:id, :display_name]},
+        #   publisher_id: {only: [:id, :display_name]},
+        #   bookseller_id: {only: [:id, :display_name]},
+        # ]
+        methods: [
+          :patron_id_ids,
+          :printer_id_ids,
+          :publisher_id_ids,
+          :bookseller_id_ids
+      ]
     end
  
 

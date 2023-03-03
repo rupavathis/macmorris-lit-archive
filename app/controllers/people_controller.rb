@@ -16,6 +16,54 @@ class PeopleController < ApplicationController
                                        flourishing_date_type: {only: :name}]
   end
 
+  # GET basicSearch/people/1
+  def showPeopleSearch
+    p = Person.find(params[:id])
+    render json: [p], only: [:id, :display_name, :date_of_birth, :date_of_death], include: [:flourishing_date, 
+                            attribs: {only: :name}, gender: {only: :name}]
+
+  end
+
+  # GET /advancedSearch/people?gender=1&rOrder=1&rSubtypes=11
+  def showAdvancedPeopleSearch
+    pAll = Person.all
+    if (params[:gender].present?) then
+      puts("in gender")
+      pAll = pAll.where(gender_id: params[:gender])
+    end
+
+    if (params[:rOrder].present?) then
+      puts("in rOrder")
+      pAll = pAll.where(religious_order: params[:rOrder])
+    end
+
+    if (params[:attribs].present?) then
+      puts("in attribs")
+      pAll = pAll.joins(:attribs).where(attribs: {id: params[:attribs]})
+    end
+
+    if (params[:rSubtype].present?) then
+      puts("in subtype")
+      pAll = pAll.joins(religious_subtypes).where(religious_subtypes: {id: params[:rSubtypes]})
+    end
+
+    render json: pAll, include: [attribs: {only: :id}, religious_subtypes: {only: :id}]
+
+  end
+
+
+   # GET /profile/m1000
+   def showProfile
+
+    p = Person.where(macmorris_id: params[:id])
+    render json: p[0], include: [languages: {only: :name}, attribs: {only: :name}, gender: {only: :name},
+                                     religious_order: {only: :name},
+                                      birth_date_type: {only: :name}, death_date_type: {only: :name}, 
+                                       flourishing_date_type: {only: :name}]
+                                       
+  end
+
+
    # GET /people/1/works
   def showWorks
     # person_new = Person.find(params[:id])
@@ -50,13 +98,8 @@ class PeopleController < ApplicationController
     render json: cc, only: :id, include: [:relationship_types, target_id: {only: [:id, :name]}, source_id: {only: [:id, :name]}]
   end
 
-  def showSearch
-    ps = Person.joins(:attribs).where(attribs: {id: params[:attribs]})
-            .joins(:religious_subtypes).where(religious_subtypes: {id: params[:rSubtype]})
-    p = ps.where(gender: params[:gender], religious_order: params[:rOrder])
+ 
 
-    render json: p, include: [attribs: {only: :name}, gender: {only: :name}]
-  end
 
   # GET filterData/1,2,3
   def filterData
