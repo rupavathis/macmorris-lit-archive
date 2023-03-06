@@ -11,15 +11,15 @@ class WorksController < ApplicationController
   ]
   end
 
-  # GET /search/works/1
-  def showWorksSearch
-    works = Work.find(params[:id])
+  # # GET /search/works/1
+  # def showWorksSearch
+  #   works = Work.find(params[:id])
 
-    render json: [works],include:  [work_classification: {only: :name}, patron_id: {only: [:id, :display_name]},
-    author_id: {only: :display_name}, printer_id: {only: [:id, :display_name]},
-    publisher_id: {only: [:id, :display_name]},bookseller_id: {only: [:id, :display_name]}
-  ]
-  end
+  #   render json: [works],include:  [work_classification: {only: :name}, patron_id: {only: [:id, :display_name]},
+  #   author_id: {only: :display_name}, printer_id: {only: [:id, :display_name]},
+  #   publisher_id: {only: [:id, :display_name]},bookseller_id: {only: [:id, :display_name]}
+  # ]
+  # end
 
     
    # GET /titles
@@ -42,19 +42,19 @@ class WorksController < ApplicationController
   ]
   end
 
-  def showSearch
-    wc = Work.joins(:work_classification).where(work_classifications: {id: params[:wClassification]})
-    wl = Work.where(language: params[:language]).or(Work.where(work_format: params[:wFormat])).or(Work.where(place: params[:place])).or(Work.where(display_title: params[:title]))
-
-    query_results = wc.or(wl)    
-    render json: query_results
- end
-
   # GET filterWorkData/1,2,3
   def filterData
     w = Work.where(id: (params[:ids]).split(','))
     render json: w, include:  [places: {only: :id}, languages: {only: :id}, work_classification: {only: :id}]
   end
+
+   # GET search/works/1
+   def showWorksSearch
+    work = Work.find(params[:id])
+    render json: [work], only:  [:id, :work_id, :display_title, :work_date], include:  [languages: {only: :name},
+    author_id: {only: :name}]
+  end
+
 
    # GET /advancedSearch/works?wFormat=1&language=1&wClassification=1&place=1&bardic=yes
    def showAdvancedWorksSearch
@@ -79,8 +79,12 @@ class WorksController < ApplicationController
       wAll = wAll.joins(:places).where(places:params[:place])
     end
 
-    render json: wAll, only:  [:id, :work_id, :display_title, :work_date], include:  [languages: {only: :id},
-    author_id: {only: :id}]
+    if (params[:bardic].present?) then
+      wAll = wAll.where.not(bardic_poetry_id:nil)
+    end
+
+    render json: wAll, only:  [:id, :work_id, :display_title, :work_date], include:  [languages: {only: :name},
+    author_id: {only: :name}]
     # , include:  [places: {only: :id}, languages: {only: :id}, work_classification: {only: :id}]
 
   end

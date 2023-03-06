@@ -16,11 +16,11 @@ class PeopleController < ApplicationController
                                        flourishing_date_type: {only: :name}]
   end
 
-  # GET basicSearch/people/1
+  # GET search/people/1
   def showPeopleSearch
     p = Person.find(params[:id])
-    render json: [p], only: [:id, :display_name, :date_of_birth, :date_of_death], include: [:flourishing_date, 
-                            attribs: {only: :name}, gender: {only: :name}]
+    render json: [p], only: [:macmorris_id, :display_name, :date_of_birth, :date_of_death, :flourishing_date], 
+                      include: [attribs: {only: :name}, gender: {only: :name}]
 
   end
 
@@ -47,7 +47,8 @@ class PeopleController < ApplicationController
       pAll = pAll.joins(religious_subtypes).where(religious_subtypes: {id: params[:rSubtypes]})
     end
 
-    render json: pAll, include: [attribs: {only: :id}, religious_subtypes: {only: :id}]
+    render json: pAll,  only: [:macmorris_id, :display_name, :date_of_birth, :date_of_death, :flourishing_date], 
+                        include: [attribs: {only: :name}, gender: {only: :name}]
 
   end
 

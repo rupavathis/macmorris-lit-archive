@@ -13,6 +13,7 @@ class ReligiousSubtypesController < ApplicationController
     render json: @religious_subtype
   end
 
+
   # POST /religious_subtypes
   def create
     @religious_subtype = ReligiousSubtype.new(religious_subtype_params)
