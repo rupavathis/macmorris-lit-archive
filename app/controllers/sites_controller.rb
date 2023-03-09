@@ -5,7 +5,7 @@ class SitesController < ApplicationController
   def index
     @sites = Site.all
 
-    render json: @sites, include: [person_id: {only: [:id, :name]}, place: {only: [:name, :id, :latitude, :longitude, :place_type_id ]}]
+    render json: @sites, include: [person_id: {only: [:id, :name]}, place: {only: [:name, :location, :id, :latitude, :longitude, :place_type_id ]}]
   end
 
   # GET /sites/1
