@@ -47,7 +47,7 @@ class PeopleController < ApplicationController
       pAll = pAll.joins(religious_subtypes).where(religious_subtypes: {id: params[:rSubtypes]})
     end
 
-    render json: pAll,  only: [:macmorris_id, :display_name, :date_of_birth, :date_of_death, :flourishing_date], 
+    render json: pAll,  only: [:id, :macmorris_id, :display_name, :date_of_birth, :date_of_death, :flourishing_date], 
                         include: [attribs: {only: :name}, gender: {only: :name}]
 
   end
@@ -64,13 +64,37 @@ class PeopleController < ApplicationController
                                        
   end
 
+  # GET people/m1000/sites
+  def showSitesConnections
+    p = Person.where(macmorris_id: params[:id])
+    render json: p[0].sites, include: [:site_type, :place]
+                                       
+  end
 
-   # GET /people/1/works
+
+  #  # GET /people/1/works
+  # def showWorks
+  #   # person_new = Person.find(params[:id])
+  #   # person_id = person_new.id
+  #   # render json: person_id
+  #   p = Person.find(params[:id])
+  #   # person_id = person_new.macmorris_id
+  #   pn = p.person_author
+  #   pp = p.person_patron
+  #   pprinter = p.person_printer
+  #   pb = p.person_bookseller
+  #   ppublisher = p.person_publisher
+  #   pWorks = pn + pp + pprinter +pb +ppublisher
+  #   # render json: {id: pn}
+  #   render json: pWorks
+  # end
+
+     # GET /people/1/works
   def showWorks
     # person_new = Person.find(params[:id])
     # person_id = person_new.id
     # render json: person_id
-    p = Person.find(params[:id])
+    p = Person.where(macmorris_id: params[:id])[0]
     # person_id = person_new.macmorris_id
     pn = p.person_author
     pp = p.person_patron
@@ -90,13 +114,14 @@ class PeopleController < ApplicationController
   end
 
   def showConnections
-    p = Person.find(params[:id])
+    p = Person.where(macmorris_id: params[:id])
     # ps = p.person_source.map{|c| c.target_id}
     # pt = p.person_target.map{|c| c.source_id}
-    cs = p.person_source
-    ct = p.person_target
+    # puts(p)
+    cs = p[0].person_source
+    ct = p[0].person_target
     cc = cs + ct
-    render json: cc, only: :id, include: [:relationship_types, target_id: {only: [:id, :name]}, source_id: {only: [:id, :name]}]
+    render json: cc, only: :id, include: [:relationship_types, target_id: {only: [:id, :macmorris_id, :name]}, source_id: {only: [:id, :macmorris_id, :name]}]
   end
 
  

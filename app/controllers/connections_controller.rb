@@ -13,15 +13,36 @@ class ConnectionsController < ApplicationController
     render json: connection, include: [target_id: {only: :name}, source_id: {only: :name}]
   end
 
-   # GET /showConnection/1,2
-   def showConnection
-    p = Person.where(id: params[:ids].split(','))
-    degree1Targets = Connection.where(source_id_id: params[:ids].split(','))
-    degree1Sources = degree1Targets.map { |element| element.target_id_id }
-    degree2Targets = Connection.where(source_id_id: degree1Sources)
-    # render json: [degree1Targets, degree2Targets], include: [target_id: {only: :name}, source_id: {only: :name}]
-    render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id]
-  end
+  #  # GET /showConnection/1,2
+  #  def showConnection
+  #   p = Person.where(id: params[:ids].split(','))
+  #   degree1Targets = Connection.where(source_id_id: params[:ids].split(','))
+  #   degree1Sources = degree1Targets.map { |element| element.target_id_id }
+  #   degree2Targets = Connection.where(source_id_id: degree1Sources)
+  #   # render json: [degree1Targets, degree2Targets], include: [target_id: {only: :name}, source_id: {only: :name}]
+  #   render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id, :id]
+  # end
+
+     # GET /showConnection/1,2
+     def showConnection
+      p = Person.where(id: params[:ids].split(','))
+      degree10Targets = Connection.where(source_id_id: params[:ids].split(','))
+      degree11Targets = Connection.where(target_id_id: params[:ids].split(','))
+
+      degree1Targets = degree10Targets + degree11Targets
+
+      degree10Sources = degree1Targets.map { |element| element.source_id_id }
+      degree11Sources = degree1Targets.map { |element| element.target_id_id }
+
+      degree1Sources = degree10Sources + degree11Sources
+
+      degree20Targets = Connection.where(source_id_id: degree1Sources)
+      degree21Targets = Connection.where(target_id_id: degree1Sources)
+
+      degree2Targets = degree20Targets + degree21Targets
+      # render json: [degree1Targets, degree2Targets], include: [target_id: {only: :name}, source_id: {only: :name}]
+      render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id, :id]
+    end
 
   # GET /showROrderConnections/1
   def showROrderConnections(rOrders)
@@ -133,7 +154,7 @@ class ConnectionsController < ApplicationController
       degree2Sources = degree1Targets.map { |element| element.target_id_id }
       degree2Targets = Connection.distinct.where(source_id_id: degree2Sources)
   
-      render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id]
+      render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id, :id]
   end
   
 
@@ -159,7 +180,7 @@ class ConnectionsController < ApplicationController
 
   # GET /connections/1
   def show
-    render json: @connection
+    render json: @connection, include: [target_id: {only: :name}, source_id: {only: :name}]
   end
 
 
@@ -265,6 +286,13 @@ class ConnectionsController < ApplicationController
   # GET /connections/1
   def show
     render json: @connection
+  end
+
+  # GET /info/connections/1
+  def showConnectionInfo
+    con =  Connection.find(params[:id])
+    render json: [con], include: [:relationship_types, target_id: {only: [:macmorris_id, :name]}, 
+                source_id: {only: [:macmorris_id, :name]}]
   end
 
   # POST /connections

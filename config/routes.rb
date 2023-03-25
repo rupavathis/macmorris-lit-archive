@@ -48,12 +48,14 @@ Rails.application.routes.draw do
   get '/worksPeopleSearch', to: 'works#advancedWorkPeople'
   get '/titles', to: 'works#titles'
   get '/profile/:id', to: 'people#showProfile'
+  get '/people/:id/sites', to: 'people#showSitesConnections'
+
 
   get 'search/people/:id', to: 'people#showPeopleSearch'
   get 'search/works/:id', to: 'works#showWorksSearch'
   get 'advancedSearch/people', to: 'people#showAdvancedPeopleSearch'
   get 'advancedSearch/works', to: 'works#showAdvancedWorksSearch'
-
+  get '/info/connections/:id', to: 'connections#showConnectionInfo'
 
 
   mount RailsAdmin::Engine => '/admin_panel', as: 'rails_admin'
