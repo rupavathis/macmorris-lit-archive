@@ -150,9 +150,21 @@ class ConnectionsController < ApplicationController
         end
       end
       degree1Sources = p.map {|element| element.id }
-      degree1Targets = Connection.distinct.where(source_id_id: degree1Sources)
-      degree2Sources = degree1Targets.map { |element| element.target_id_id }
-      degree2Targets = Connection.distinct.where(source_id_id: degree2Sources)
+      degree10Targets = Connection.distinct.where(source_id_id: degree1Sources)
+      degree11Targets = Connection.distinct.where(target_id_id: degree1Sources)
+
+      degree1Targets = degree10Targets + degree11Targets
+      degree20Sources = degree1Targets.map { |element| element.target_id_id }
+      degree21Sources = degree1Targets.map { |element| element.source_id_id }
+
+
+      degree2Sources = degree20Sources + degree21Sources
+      degree20Targets = Connection.distinct.where(source_id_id: degree2Sources)
+      degree21Targets = Connection.distinct.where(target_id_id: degree2Sources)
+
+      degree2Targets = degree20Targets + degree21Targets
+      # degree2Targets["message"] = "it works"
+
   
       render json: [degree1Targets, degree2Targets], only: [:source_id_id, :target_id_id, :id]
   end

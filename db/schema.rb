@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(version: 2023_01_24_142442) do
     t.string "gaelic_name"
     t.bigint "place_id"
     t.text "description"
-    t.text "gaelic_decription"
+    t.text "gaelic_description"
     t.string "reference_text"
     t.bigint "bardic_poetry_id"
     t.datetime "created_at", precision: 6, null: false

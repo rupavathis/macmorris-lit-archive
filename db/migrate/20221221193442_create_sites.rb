@@ -7,7 +7,7 @@
       t.string :gaelic_name
       t.references :place, foreign_key: true
       t.text :description
-      t.text :gaelic_decription
+      t.text :gaelic_description
       t.string :reference_text
       t.references :bardic_poetry, foreign_key: true
 
