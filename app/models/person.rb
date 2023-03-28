@@ -15,10 +15,10 @@ class Person < ApplicationRecord
   has_and_belongs_to_many :attribs
   has_and_belongs_to_many :religious_subtypes
   has_and_belongs_to_many :religious_designations
-  has_and_belongs_to_many :person_patron, :class_name => 'Work'
-  has_and_belongs_to_many :person_printer, :class_name => 'Work'
-  has_and_belongs_to_many :person_publisher, :class_name => 'Work'
-  has_and_belongs_to_many :person_bookseller, :class_name => 'Work'
+  has_and_belongs_to_many :person_patron, class_name: 'Work', join_table: :works_patrons
+  has_and_belongs_to_many :person_printer, :class_name => 'Work', join_table: :works_printers
+  has_and_belongs_to_many :person_publisher, :class_name => 'Work', join_table: :works_publishers
+  has_and_belongs_to_many :person_bookseller, :class_name => 'Work', join_table: :works_booksellers
   has_and_belongs_to_many :sites
   has_and_belongs_to_many :authorship_types
   attribute :name

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_24_142442) do
+ActiveRecord::Schema.define(version: 2023_03_28_165224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -348,6 +348,34 @@ ActiveRecord::Schema.define(version: 2023_01_24_142442) do
     t.index ["work_form_id"], name: "index_works_on_work_form_id"
     t.index ["work_format_id"], name: "index_works_on_work_format_id"
     t.index ["work_source_library_id"], name: "index_works_on_work_source_library_id"
+  end
+
+  create_table "works_booksellers", id: false, force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "work_id", null: false
+    t.index ["person_id", "work_id"], name: "index_works_booksellers_on_person_id_and_work_id"
+    t.index ["work_id", "person_id"], name: "index_works_booksellers_on_work_id_and_person_id"
+  end
+
+  create_table "works_patrons", id: false, force: :cascade do |t|
+    t.bigint "work_id", null: false
+    t.bigint "person_id", null: false
+    t.index ["person_id", "work_id"], name: "index_works_patrons_on_person_id_and_work_id"
+    t.index ["work_id", "person_id"], name: "index_works_patrons_on_work_id_and_person_id"
+  end
+
+  create_table "works_printers", id: false, force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "work_id", null: false
+    t.index ["person_id", "work_id"], name: "index_works_printers_on_person_id_and_work_id"
+    t.index ["work_id", "person_id"], name: "index_works_printers_on_work_id_and_person_id"
+  end
+
+  create_table "works_publishers", id: false, force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "work_id", null: false
+    t.index ["person_id", "work_id"], name: "index_works_publishers_on_person_id_and_work_id"
+    t.index ["work_id", "person_id"], name: "index_works_publishers_on_work_id_and_person_id"
   end
 
   add_foreign_key "attribs", "roles"
