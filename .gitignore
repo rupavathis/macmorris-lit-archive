@@ -26,3 +26,5 @@
 
 #Ignore vendor files
 /vendor/*
+
+.env

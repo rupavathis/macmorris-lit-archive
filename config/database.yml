@@ -86,5 +86,5 @@ test:
 production:
   <<: *default
   # database: code_production
-  username: macmorris
-  password: <%= ENV['CODE_DATABASE_PASSWORD'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>

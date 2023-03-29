@@ -4,12 +4,12 @@ services:
     image: postgres:12.3
     ports:
       - "5432:5432"
-    # volumes:
-    #   - ../db/postgres/data:/var/lib/postgresql/data/
-    #   - ../db/postgres/tmp/:/var/run/postgresql/
+    volumes:
+      - /fastscratch/data/macmorris_backend:/var/lib/postgresql/data/
     environment:
-      POSTGRES_PASSWORD: macmorris
-  web:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  app:
     build: 
       dockerfile: Dockerfile
       args:
@@ -30,10 +30,17 @@ services:
       - /etc/group:/etc/group:ro
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
-  # nginx:
-  #   image: nginx:1.0
-  #   # container_name: nginx-ser
-  #   ports:
-  #     - 80:80
-  #   depends_on:
-  #     - web
+    environment:
+      RAILS_ENV: ${RAILS_ENV}
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /fastscratch/projects/macmorris_frontend:/usr/share/nginx/html
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
