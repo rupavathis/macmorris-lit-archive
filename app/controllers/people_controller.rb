@@ -24,9 +24,9 @@ class PeopleController < ApplicationController
 
   end
 
-  # GET /advancedSearch/people?gender=1&rOrder=1&rSubtypes=11
+  # GET `/advancedSearch/people?gender=1&rOrder=1&rSubtypes=11&roles=1`
   def showAdvancedPeopleSearch
-    pAll = Person.all
+    pAll = Person.all.includes(:gender, :attribs)
     if (params[:gender].present?) then
       puts("in gender")
       pAll = pAll.where(gender_id: params[:gender])
@@ -39,12 +39,24 @@ class PeopleController < ApplicationController
 
     if (params[:attribs].present?) then
       puts("in attribs")
-      pAll = pAll.joins(:attribs).where(attribs: {id: params[:attribs]})
+      pAll = pAll.where(attribs: {id: params[:attribs]})
     end
 
-    if (params[:rSubtype].present?) then
+    if (params[:roles].present?) then
+      puts("in roles")  
+      a = Attrib.where(role_id: params[:roles]).map {|e| e.id} 
+      pAll = pAll.where(attribs: {id: a})
+    end
+
+    if (params[:rDes].present?) then
+      puts("in rDes")  
+      a = ReligiousSubtype.where(religious_designation_id: params[:rDes]).map {|e| e.id} 
+      pAll = pAll.joins(:religious_subtypes).where(religious_subtypes: {id: a})
+    end
+
+    if (params[:rSubtype].present? ) then
       puts("in subtype")
-      pAll = pAll.joins(religious_subtypes).where(religious_subtypes: {id: params[:rSubtypes]})
+      pAll = pAll.joins(:religious_subtypes).where(religious_subtypes: {id: params[:rSubtypes]})
     end
 
     render json: pAll,  only: [:id, :macmorris_id, :display_name, :date_of_birth, :date_of_death, :flourishing_date], 
@@ -57,7 +69,7 @@ class PeopleController < ApplicationController
    def showProfile
 
     p = Person.where(macmorris_id: params[:id])
-    render json: p[0], include: [languages: {only: :name}, attribs: {only: :name}, gender: {only: :name},
+    render json: p[0],  include: [languages: {only: :name}, attribs: {only: :name}, gender: {only: :name},
                                      religious_order: {only: :name},
                                       birth_date_type: {only: :name}, death_date_type: {only: :name}, 
                                        flourishing_date_type: {only: :name}]

@@ -221,25 +221,29 @@ class ConnectionsController < ApplicationController
 
     # GET /showWorkTitleConnections/1
     def showWorkTitleConnections
-    o1 = Work.find(params[:id])
-    p0 = getPeople(o1)
-    o2 = p0.map{ |e| (getWorks(e))}.flatten().uniq
-    render json: [[o1],o2], 
-      only: [:id, :work_id, :display_title, :author_id_id ], 
-      methods: [
-        :patron_id_ids,
-        :printer_id_ids,
-        :publisher_id_ids,
-        :bookseller_id_ids
-    ]
+      o1 = Work.find(params[:id])
+      p0 = getPeople(o1)
+      o2 = p0.map{ |e| (getWorks(e))}.flatten().uniq{ |p| p.id }
+      
+      render json: [[o1],o2],
+        only: [:id, :work_id, :display_title, :author_id_id],
+        methods: [
+          :patron_id_ids,
+          :printer_id_ids,
+          :publisher_id_ids,
+          :bookseller_id_ids
+      ]
     end
 
     def getWorks(p)
-      return  p.person_author + p.person_printer.or(p.person_patron).or(p.person_publisher).or(p.person_bookseller)
+      # return p
+      # return  p.person_author + p.person_printer.or(p.person_patron).or(p.person_publisher).or(p.person_bookseller)
+      return  (p.person_author + p.person_printer+ p.person_patron + p.person_publisher + p.person_bookseller).uniq { |p| p.id }
     end
 
     def getPeople(w)
-      return [w.author_id] + w.printer_id.or(w.patron_id).or(w.publisher_id).or(w.bookseller_id)
+      # return [w.author_id] + w.printer_id.or(w.patron_id).or(w.publisher_id).or(w.bookseller_id)
+      return ([w.author_id] + w.printer_id + w.patron_id + w.publisher_id + w.bookseller_id).uniq{ |p| p.id }
     end
     # GET /advancedWorkSearch?wClassification=1,2
     def advancedWorkSearch
@@ -252,7 +256,6 @@ class ConnectionsController < ApplicationController
 
       
       render json: [o1,o2], 
-      # render json: o1, 
         only: [:id, :work_id, :display_title, :author_id_id ], 
         # include: [
         #   author_id: {only: [:id,:name]},

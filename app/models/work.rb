@@ -8,7 +8,6 @@ class Work < ApplicationRecord
   belongs_to :bardic_poetry, optional: true
   belongs_to :work_source_library, optional: true
   has_and_belongs_to_many :patron_id, class_name: 'Person', join_table: :works_patrons
-  # , join_table: :works_patrons
   has_and_belongs_to_many :printer_id, :class_name => 'Person', join_table: :works_printers
   has_and_belongs_to_many :publisher_id, :class_name => 'Person', join_table: :works_publishers
   has_and_belongs_to_many :bookseller_id, :class_name => 'Person', join_table: :works_booksellers

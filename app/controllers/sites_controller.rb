@@ -10,7 +10,7 @@ class SitesController < ApplicationController
 
   # GET /sites/1
   def show
-    render json: @site,  include: [:site_type, :place]
+    render json: @site,  include: [:site_type, :place, person_id: {only: [:id, :macmorris_id, :name]}]
   end
 
   # POST /sites
