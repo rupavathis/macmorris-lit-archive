@@ -56,7 +56,7 @@ class WorksController < ApplicationController
   end
 
 
-   # GET /advancedSearch/works?wFormat=1&language=1&wClassification=1&place=1&bardic=yes
+   # GET /advancedSearch/works?wFormat=1&language=1&wClassification=1&place=1&bardic=yes&author=1
    def showAdvancedWorksSearch
 
     # wc = Work.joins(:work_classification).where(work_classifications: {id: params[:wClassification]})
@@ -81,6 +81,10 @@ class WorksController < ApplicationController
 
     if (params[:bardic].present?) then
       wAll = wAll.where.not(bardic_poetry_id:nil)
+    end
+
+    if(params[:author].present?) then
+      wAll = wAll.where(author_id_id: params[:author])
     end
 
     render json: wAll, only:  [:id, :work_id, :display_title, :work_date], include:  [languages: {only: :name},

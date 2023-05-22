@@ -3,8 +3,7 @@ class PlacesController < ApplicationController
 
   # GET /places
   def index
-    @places = Place.all
-
+    @places = Place.all.select { |place| place.works.present? }
     render json: @places, include: [place_type: {only: [:name]}]
   end
 
