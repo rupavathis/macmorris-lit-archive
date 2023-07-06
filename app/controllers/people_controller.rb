@@ -125,6 +125,7 @@ class PeopleController < ApplicationController
     :flourishing_date]
   end
 
+  # /people/m1815/connections
   def showConnections
     p = Person.where(macmorris_id: params[:id])
     # ps = p.person_source.map{|c| c.target_id}
@@ -133,7 +134,7 @@ class PeopleController < ApplicationController
     cs = p[0].person_source
     ct = p[0].person_target
     cc = cs + ct
-    render json: cc, only: :id, include: [:relationship_types, target_id: {only: [:id, :macmorris_id, :name]}, source_id: {only: [:id, :macmorris_id, :name]}]
+    render json: cc, only: [:id], include: [:relationship_types, target_id: {only: [:id, :macmorris_id, :name]}, source_id: {only: [:id, :macmorris_id, :name]}]
   end
 
  
